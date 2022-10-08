@@ -1,0 +1,14 @@
+version: 0.1
+
+phases:
+  pre_build:
+    commands:
+      - npm install
+      - npm install -g @angular/cli@13.2.2
+  build:
+    commands:
+      - npm run build
+  post_build:
+    commands:
+      - aws s3 sync ./dist s3://sponsorships.cpjam.com --delete
+      - aws cloudfront create-invalidation --distribution-id E3LEI3MYYCIPLL --paths /index.html

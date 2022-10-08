@@ -10,5 +10,5 @@ phases:
       - npm run build
   post_build:
     commands:
-      - aws s3 sync ./dist s3://sponsorships.cpjam.com --delete
+      - aws s3 sync ./dist s3://scholarships.cpjam.com --delete
       - aws cloudfront create-invalidation --distribution-id E3LEI3MYYCIPLL --paths /index.html

@@ -6,7 +6,7 @@
     class="me-2"
     src="{{ user.headshot }}" />
   
-  <a *ngIf="config.activeLinks && user.url" [routerLink]="'/view/' + user.url">
+  <a *ngIf="config.activeLinks && user.url" href="https://cpjam.com/view/{{ user.url }}">
     <img
       [class.userImageSmall]="config.imageSize === 'small'"
       [class.userImageMedium]="config.imageSize === 'medium'"
@@ -16,7 +16,7 @@
   </a>
   <div class="info">
     <span *ngIf="!config.activeLinks || !user.url" class="name text-only">{{ user.fullName }}<span *ngIf="config.includeAppellations && user.appellations">, {{user.appellations}}</span></span>
-    <a *ngIf="config.activeLinks && user.url" [routerLink]="'/view/' + user.url">
+    <a *ngIf="config.activeLinks && user.url" href="https://cpjam.com/view/{{ user.url }}">
       <span class="name">{{ user.fullName }}<span *ngIf="config.includeAppellations && user.appellations">, {{user.appellations}}</span></span>
     </a>
     <div *ngIf="config.activeLinks" class="details">

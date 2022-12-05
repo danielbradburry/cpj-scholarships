@@ -1,0 +1,46 @@
+@import "../../../../sass/vars";
+
+.user {
+  padding: 4px 2px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  .info {
+    display: block;
+    position: relative;
+    flex-basis: 1;
+    min-width: 0;
+    .name, .email {
+      display: block;
+    }
+  }
+  .details {
+    line-height: 16px;
+  }
+  .name {
+    font-weight: 700;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-height: 18px;
+    &.text-only {
+      color: $grayDark;
+    }
+  }
+  .email {
+    font-style: italic;
+    font-size: 12px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .memberType, .phone {
+    font-size: 12px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  a {
+    text-decoration: none;
+  }
+}

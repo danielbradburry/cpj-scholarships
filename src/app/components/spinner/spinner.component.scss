@@ -1,0 +1,32 @@
+@import "../../../sass/vars.scss";
+
+:host {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(239, 239, 239, 0.7);
+  .spinner:before {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 60px;
+    width: 60px;
+    margin-top: -30px;
+    margin-left: -30px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: $primaryBlue;
+    border-bottom-color: $primaryBlue;
+    animation: spinner 0.7s ease infinite;
+  }
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}

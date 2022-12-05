@@ -1,0 +1,13 @@
+<scholarship-heading [program]="program" [active]="2"></scholarship-heading>
+
+<h3>For Help Applying Contact:</h3>
+<div *ngFor="let coordinator of program?.coordinators" class="col-sm-12">
+  <div *ngIf="coordinator.user" class="user">
+    <mini-profile [user]="coordinator.user" [config]="miniProfileConfig"></mini-profile>
+  </div>
+  <div *ngIf="!coordinator.user" class="mb-2 non-user">
+    <div class="name">{{ coordinator.text }}</div>
+    <a *ngIf="coordinator.email" class="email" href="mailto:{{coordinator.email}}">{{ coordinator.email }}</a>
+    <a *ngIf="coordinator.phone" href="tel:{{coordinator.phone}}" class="phone">{{ coordinator.phone | phone }}</a>
+  </div>
+</div>

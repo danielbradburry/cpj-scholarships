@@ -1,0 +1,31 @@
+<scholarship-heading [program]="program" [active]="1"></scholarship-heading>
+
+<div
+  *ngIf="!applicant"
+>
+  <h3>Welcome!</h3>
+  <p>In order to apply to scholarships through this online platform, applicants are required to first create an online account.</p>
+  <app-login
+    *ngIf="state === 'login'"
+    (changeToSignIn)="changeToSignIn()"
+    (requestLoginReload)="requestLoginReload()"
+  ></app-login>
+  <app-signin
+    *ngIf="state === 'signin'"
+    (changeToLogIn)="changeToLogIn()"
+  ></app-signin>
+</div>
+<div *ngIf="applicant">
+  <div class="tabs">
+    <div
+      *ngFor="let tab of tabs" class="tab"
+      (click)="changeComponent(tab)"
+      [class.active]="tab.active">
+      {{tab.label}}
+    </div>
+  </div>
+  <h3>Hello {{applicant.fullName}}!</h3>
+  <div view-ref></div>
+</div>
+
+

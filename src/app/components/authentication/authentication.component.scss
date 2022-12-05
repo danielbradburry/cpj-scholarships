@@ -1,0 +1,60 @@
+@import "../../../sass/vars";
+
+:host {
+  color: $primaryBlueDark;
+}
+
+h3 {
+  font-size: 20px;
+  border-bottom: 2px solid $gray;
+  padding-bottom: 4px;
+  font-weight: 700;
+  color: $primaryBlueDark;
+  margin-top: 20px;
+}
+
+p {
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+
+.tabs {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  border-left: 1px solid $gray;
+  color: $gray;
+  .tab {
+    padding: 4px 8px;
+    border-right: 1px solid $gray;
+    border-bottom: 1px solid $gray;
+    cursor: pointer;
+    transition: all 0.25s ease 0s;
+    &.active {
+      color: $primaryBlueDark;
+      background-color: $grayLight;
+    }
+    ~ .tab {
+      padding-left: 8px;
+    }
+    &:hover {
+      background-color: $grayLight;
+      color: $grayDark;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .tabs {
+    align-items: stretch;
+    justify-content: center;
+    text-align: center;
+    .tab {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+  }
+}

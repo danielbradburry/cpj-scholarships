@@ -1,0 +1,40 @@
+@import "../../../../sass/vars";
+
+h3 {
+  font-size: 18px;
+}
+
+a {
+  color: $primaryBlueDark;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+p {
+  color: $primaryBlueDark;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.signin-frame {
+  display: flex;
+  margin-top: 30px;
+  p {
+    flex: 1;
+    padding: 0 8px;
+  }
+  auto-form {
+    border: 1px solid $grayLight;
+    padding: 8px 16px;
+    flex: 2;
+  }
+}
+
+@media (max-width: 767px) {
+  .signin-frame {
+    flex-direction: column;
+    > p {
+      margin-top: 20px;
+    }
+  }
+}

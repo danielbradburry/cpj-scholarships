@@ -1,0 +1,17 @@
+@import "../../../../../sass/vars";
+
+textarea {
+  height: 132px !important;
+}
+
+.limit {
+  padding: 2px 4px;
+  margin: 0 4px -1px;
+  font-style: italic;
+}
+
+.overLimit {
+  color: $redDark;
+  padding: 2px 4px;
+  margin: 0 4px -1px;
+}

@@ -1,0 +1,63 @@
+@import "../../../../sass/vars";
+
+:host {
+  color: $primaryBlueDark;
+  display: block;
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    border-bottom: 1px solid $primaryBlueDark;
+  }
+
+  h4 {
+    display: flex;
+    font-size: 16px;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .review {
+    .step-content {
+      background: $offWhite;
+      padding: 8px;
+      color: $primaryBlueDark;
+      .question {
+        font-weight: 700;
+        span {
+          font-weight: 400;
+        }
+      }
+      .file {
+        a {
+          font-size: 14px;
+        }
+        .size {
+          font-size: 12px;
+          padding-left: 12px;
+          font-style: italic;
+        }
+      }
+    }
+    ~ .review {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid $grayLight;
+    }
+  }
+
+  p {
+    font-weight: 700;
+    font-size: 14px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid $grayLight;
+    margin-bottom: 4px;
+    &.no-border {
+      border-bottom: none;
+      margin: 0px;
+      padding: 0px;
+    }
+  }
+}
+
+
+

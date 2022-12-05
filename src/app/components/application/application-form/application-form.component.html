@@ -1,0 +1,110 @@
+<h3>{{form.name}}</h3>
+<div class="form" [formGroup]="formGroup">
+  <div *ngFor="let question of form.applicationFormQuestions" class="row">
+    <div class="col-sm-12">
+      <h1 *ngIf="question.type === 'heading'">{{ question.label }}</h1>
+      <p *ngIf="question.type === 'paragraph'">{{ question.label }}</p>
+      <label
+        *ngIf="question.type !== 'paragraph' && question.type !== 'heading'"
+        for="{{question.name}}"
+        [class.checkboxLabel]="question.type === 'checkbox'"
+      >
+        <span *ngIf="question.required">* </span>{{ question.label }}
+        <input
+          autocomplete="new-password"
+          *ngIf="question.type === 'text'"
+          [required]="question.required"
+          type="text"
+          class="form-control"
+          (ngModelChange)="formChanged()"
+          formControlName="{{question.name}}" />
+        <input
+          autocomplete="new-password"
+          *ngIf="question.type === 'email'"
+          [required]="question.required"
+          type="text"
+          class="form-control"
+          placeholder="Email Address"
+          (ngModelChange)="formChanged()"
+          formControlName="{{question.name}}" />
+        <input 
+          autocomplete="new-password"
+          *ngIf="question.type === 'phone'"
+          [required]="question.required"
+          type="tel"
+          class="form-control"
+          placeholder="XXX-XXX-XXXX"
+          mask="000-000-0000"
+          (ngModelChange)="formChanged()"
+          formControlName="{{question.name}}" />
+        <input
+          autocomplete="new-password"
+          *ngIf="question.type === 'ssn'"
+          [required]="question.required"
+          type="text"
+          class="form-control"
+          placeholder="XXX-XX-XXXX"
+          mask="XXX-XX-0000"
+          [hiddenInput]="true"
+          formControlName="{{question.name}}" />
+        <textarea-restrict
+          autocomplete="new-password"
+          onfocusout="this.classList.remove('active')"
+          onfocusin="this.classList.add('active')"
+          [element]="question"
+          [group]="formGroup"
+          (valueChanged)="formChanged()"
+          *ngIf="question.type === 'textarea'"></textarea-restrict>
+        <input *ngIf="question.type === 'checkbox'"
+          id="{{question.name}}"
+          [required]="question.required"
+          type="checkbox"
+          class="checkbox form-control"
+          (ngModelChange)="formChanged()"
+          formControlName="{{question.name}}" />
+        <select *ngIf="question.type === 'select'" class="form-control" formControlName="{{question.name}}" (ngModelChange)="formChanged()">
+          <option *ngFor="let option of question.options" [value]="option.data">{{option.data}}</option>
+        </select>
+        <div
+          autocomplete="new-password"
+          *ngIf="question.type === 'date'"
+          class="input-group"
+          onfocusout="this.classList.remove('active')"
+          onfocusin="this.classList.add('active')">
+          <input
+            [required]="question.required"
+            class="form-control"
+            placeholder="MM-DD-YYYY"
+            formControlName="{{question.name}}"
+            ngbDatepicker
+            #d="ngbDatepicker"
+            (ngModelChange)="formChanged()">
+          <div class="input-group-append" *ngIf="!scoringView">
+            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i class="far fa-calendar-alt"></i></button>
+          </div>
+        </div>
+        <div class="inputTipWrapper" *ngFor="let error of formGroup.controls[question.name].errors | keys">
+          <span *ngIf="formGroup.controls[question.name].touched && question[error.key + 'ErrorLabel']" class="inputTip">{{question[error.key + 'ErrorLabel']}}</span>
+        </div>
+      </label>
+    </div>
+  </div>
+  <div class="buttons">
+    <button
+      (click)="submit()"
+      class="btn btn-confirm formSubmit"
+      id="applicationFormSubmit"
+      [disabled]="!formGroup.valid || submitting"
+    >
+      <span>Continue</span>
+      <img *ngIf="submitting" class="loading" src="/assets/images/loading-confirm.gif" />
+      <i *ngIf="!submitting" class="fas fa-arrow-circle-right"></i>
+    </button>
+    <button
+      (click)="submitFinishLater()"
+      class="hidden"
+      id="applicationFormFinishLater"
+      [disabled]="!formGroup.valid || submitting"
+    ></button>
+  </div>
+</div>

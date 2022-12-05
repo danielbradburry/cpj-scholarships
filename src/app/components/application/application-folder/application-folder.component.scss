@@ -1,0 +1,84 @@
+@import "../../../../sass/vars";
+
+:host {
+  color: $primaryBlueDark;
+  display: block;
+  h3 {
+    font-size: 16px;
+    border-bottom: 1px solid $primaryBlueDark;
+    font-weight: 700;
+  }
+}
+
+.folder {
+  background: $offWhite;
+  padding: 8px 12px;
+}
+
+.description {
+  font-size: 14px;
+}
+
+.status {
+  font-size: 12px;
+  padding-top: 12px;
+  margin-top: 12px;
+  span {
+    font-weight: 700;
+  }
+  .warning {
+    color: $redDark;
+  }
+}
+
+.empty {
+  margin-top: 10px;
+}
+
+upload-progress {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.in-progress {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.files {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 2px solid $gray;
+  padding: 12px 12px;
+  margin-top: 12px;
+  .file {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    .name {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      border-left: 2px solid $grayLight;
+      max-width: calc(100% - 115px);
+      padding-left: 12px;
+      span:first-child {
+        font-weight: 700;
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      span:last-child {
+        font-style: italic;
+        font-size: 12px;
+      }
+    }
+    ~ .file {
+      border-top: 1px solid $grayLight;
+      padding-top: 12px;
+    }
+  }
+}

@@ -1,0 +1,37 @@
+<div class="modal-header">
+  <h4 class="modal-title">Application Submission Review</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div *ngIf="!loading">
+    <h3>{{scholarship.scholarshipName}}</h3>
+    <div
+      class="review"
+      *ngFor="let step of scholarship.steps; let i = index"
+    >
+      <h4 class="step">{{step.name}}</h4>
+      <div class="step-content" *ngIf="step.form">
+        <div class="question" *ngFor="let question of step.form.applicationFormQuestions">
+          <label>{{question.label}}:
+            <span>{{question.value}}</span>
+          </label>
+        </div>
+      </div>
+      <div class="step-content" *ngIf="step.folder">
+        <p *ngIf="!step.folder.applicationUploads?.length" class="no-border">
+          No files uploaded.
+        </p>
+        <div class="files" *ngIf="step.folder.applicationUploads?.length">
+          <p>Files uploaded:</p>
+          <div class="file" *ngFor="let upload of step.folder.applicationUploads">
+            <a href="{{upload.URL}}" target="_blank">{{upload.name}}</a>
+            <div class="size">- {{upload.size}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <spinner *ngIf="loading"></spinner>
+</div>

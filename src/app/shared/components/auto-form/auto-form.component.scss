@@ -1,0 +1,65 @@
+@import "../../../../sass/vars";
+
+.heading {
+  border-bottom: 2px solid $primaryBlue;
+  margin-bottom: 14px;
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+  }
+}
+
+p {
+  font-size: 12px;
+  font-style: italic;
+}
+
+.calendar {
+  padding-left: 7px;
+  border-radius: 0 4px 4px 0;
+  height: 28px;
+  .fa-calendar-alt {
+    font-size: 16px;
+  }
+}
+
+.buttons {
+  text-align: right;
+}
+
+.formSubmit {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.checkboxLabel {
+  position: relative;
+  padding-left: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: 6px;
+  font-size: 14px;
+  .checkbox {
+    width: 18px;
+    height: 18px;
+    box-shadow: none;
+    flex: 0 0 16px;
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+    }
+  }
+}
+
+input:focus {
+  + .inputTipWrapper {
+    display: none;
+  }
+}
+
+.hide {
+  display: none;
+}

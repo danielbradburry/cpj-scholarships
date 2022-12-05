@@ -24,11 +24,14 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/assets",
               "src/favicon.ico",
-              "src/assets"
+              "src/favicon-32x32.png",
+              "src/favicon-16x16.png",
+              "src/manifest.json"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/sass/styles.scss"
             ],
             "scripts": []
           },
@@ -96,12 +99,15 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/sass/styles.scss"
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "af82fa49-6268-41f2-a8fe-da1273b6132b"
   }
 }

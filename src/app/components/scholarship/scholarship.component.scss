@@ -1,0 +1,26 @@
+@import "../../../sass/vars";
+
+h3 {
+  font-size: 20px;
+  border-bottom: 2px solid $gray;
+  padding-bottom: 4px;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: $primaryBlueDark;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+label {
+  font-weight: 700;
+  p {
+    font-weight: 400;
+  }
+}
+
+.requirements {
+  border-top: 1px solid $gray;
+  padding-top: 1rem;
+}

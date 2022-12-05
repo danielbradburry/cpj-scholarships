@@ -1,0 +1,152 @@
+<form [formGroup]="formGroup">
+  <div
+    *ngFor="let row of configuration.formElements?.rows"
+    class="row">
+    <div *ngIf="row.heading" class="heading col-sm-12">
+      <h3>{{row.heading}}</h3>
+    </div>
+    <p
+      class="col-sm-12 form-group"
+      *ngIf="row.forward">{{row.forward}}</p>
+    <div
+      *ngFor="let element of row.elements"
+      class="{{element.class}}"
+      [class.hide]="element.hidden">
+      <label
+        for="{{element.name}}"
+        [class.checkboxLabel]="element.type === 'checkbox'">
+        <span *ngIf="element.required">* </span>{{element.label}}
+        <input
+          [autocomplete]="element.autoComplete || 'new-password'"
+          *ngIf="isInput(element.type)"
+          [required]="element.required"
+          type="text"
+          class="form-control"
+          formControlName="{{element.name}}" />
+        <input
+          autocomplete="new-password"
+          *ngIf="element.type === 'currency'"
+          [required]="element.required"
+          type="text"
+          currencyMask
+          class="form-control"
+          formControlName="{{element.name}}"
+          [options]="{ prefix: '$', align: 'left', nullable: false }" />
+        <input
+          autocomplete="new-password"
+          *ngIf="element.type === 'website'"
+          [required]="element.required"
+          type="text"
+          class="form-control"
+          placeholder="Website (http/https required)"
+          formControlName="{{element.name}}" />
+        <input
+          [autocomplete]="element.autoComplete || 'new-password'"
+          *ngIf="element.type === 'email'"
+          [required]="element.required"
+          type="text"
+          class="form-control"
+          placeholder="Email Address"
+          formControlName="{{element.name}}" />
+        <input
+          [autocomplete]="element.autoComplete || 'new-password'"
+          *ngIf="element.type === 'phone'"
+          [required]="element.required"
+          type="tel"
+          class="form-control"
+          placeholder="XXX-XXX-XXXX"
+          mask="000-000-0000"
+          formControlName="{{element.name}}" />
+        <input
+          autocomplete="new-password"
+          *ngIf="element.type === 'number'"
+          [required]="element.required"
+          type="number"
+          class="form-control"
+          formControlName="{{element.name}}"
+          (ngModelChange)="notify(element.requiresNotice)"/>
+        <input
+          [autocomplete]="element.autoComplete ? '' : 'new-password'"
+          *ngIf="element.type === 'password' || element.type === 'password-any'"
+          (ngModelChange)="validatePasswordsMatch(element)"
+          [required]="element.required"
+          type="password"
+          class="form-control"
+          formControlName="{{element.name}}" />
+        <input
+          *ngIf="element.type === 'checkbox'"
+          id="{{element.name}}"
+          [required]="element.required"
+          type="checkbox"
+          class="checkbox form-control"
+          formControlName="{{element.name}}" />
+        <input
+          *ngIf="element.type === 'radio'"
+          type="radio"
+          class="form-control"
+          formControlName="{{element.name}}"
+          name="{{element.radioName}}" />
+        <input
+          *ngIf="element.type === 'hidden'"
+          type="hidden"
+          formControlName="{{element.name}}" />
+        <select
+          *ngIf="element.type === 'select'"
+          class="form-control"
+          formControlName="{{element.name}}"
+          (ngModelChange)="validateDateRanges(element); notify(element)">
+          <option
+            *ngFor="let option of element.options"
+            [ngValue]="option.value">{{option.label}}</option>
+        </select>
+        <div
+          autocomplete="new-password"
+          *ngIf="element.type === 'date'"
+          class="input-group"
+          onfocusout="this.classList.remove('active')"
+          onfocusin="this.classList.add('active')">
+            <input
+              [required]="element.required"
+              (ngModelChange)="validateDateRanges(element)"
+              class="form-control"
+              placeholder="MM-DD-YYYY"
+              formControlName="{{element.name}}"
+              ngbDatepicker
+              #d="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i class="far fa-calendar-alt"></i></button>
+            </div>
+        </div>
+        <div class="inputTipWrapper" *ngFor="let error of formGroup.controls[element.name].errors | keys">
+          <span *ngIf="(formGroup.controls[element.name].touched || formGroup.controls[element.name].force) && element[error.key + 'ErrorLabel']" class="inputTip">{{element[error.key + 'ErrorLabel']}}</span>
+        </div>
+      </label>
+    </div>
+    <p class="col-sm-12 form-group" *ngIf="row.afterword">{{row.afterword}}</p>
+  </div>
+  <div class="buttons">
+    <button
+      *ngIf="configuration.submitCTA"
+      (click)="submit()"
+      class="btn btn-confirm formSubmit"
+      [disabled]="!formGroup.valid || optionalDisable || submitting"
+    >
+      <img *ngIf="submitting" class="loading" src="/assets/images/loading-confirm.gif" />
+      <i *ngIf="!submitting" class="fas fa-check-circle"></i>
+      <span [innerText]="configuration.submitCTA"></span></button>
+    <button
+      *ngIf="configuration.cancelCTA"
+      class="btn btn-secondary"
+      (click)="cancel($event)"
+      placement="top"
+      [ngbTooltip]="configuration.cancelCTA"
+    ><i class="fa fa-times-circle"></i></button>
+    <button
+      *ngIf="configuration.removeCTA"
+      class="btn btn-danger"
+      (click)="remove($event, configuration.removeConfirm)"
+      placement="top"
+      [ngbTooltip]="configuration.removeCTA"
+    ><i class="fas fa-trash-alt"></i></button>
+  </div>
+</form>

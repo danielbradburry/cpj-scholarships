@@ -17,8 +17,12 @@ export class HomeResolver implements Resolve<any> {
     const scholarshipProgramKey = this.getScholarshipKey(route);
     
     return this.scholarshipService.getScholarshipProgramForView(scholarshipProgramKey).pipe(
-      catchError(() => {
-        return of(null);
+      catchError(error => {
+        if (error.status === 404) {
+          window.location.href = 'https://cpjam.com';
+        } else {
+          return of(null);
+        }
       }));
   }
 

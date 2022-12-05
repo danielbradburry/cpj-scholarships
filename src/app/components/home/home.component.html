@@ -2,6 +2,9 @@
 
 <div class="scholarships">
 	<h3>Our Scholarship/Grant Opportunities</h3>
+	<p *ngIf="!program?.scholarships?.length">
+    No scholarship/grant opportunities available.
+  </p>
 	<a
 		class="scholarship"
 		*ngFor="let scholarship of program?.scholarships"

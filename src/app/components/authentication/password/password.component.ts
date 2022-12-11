@@ -18,7 +18,10 @@ export class ChangePasswordComponent implements OnInit {
   @Input() reloading: boolean;
   @Output() submitted: EventEmitter<any> = new EventEmitter();
 
-  constructor(private toastr: ToastrService, private scholarshipService: ScholarshipService) {}
+  constructor(
+    private toastr: ToastrService,
+    private scholarshipService: ScholarshipService
+  ) {}
 
   ngOnInit() {
     this.formConfiguration = {
@@ -34,7 +37,8 @@ export class ChangePasswordComponent implements OnInit {
                 required: true,
                 value: '',
                 requiredErrorLabel: 'Password required',
-                patternErrorLabel: 'Minimum 7 characters, requires upper, lower and numeric.'
+                patternErrorLabel:
+                  'Minimum 7 characters, requires upper, lower and numeric.'
               },
               {
                 class: 'form-group col-sm-6',

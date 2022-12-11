@@ -18,7 +18,10 @@ export class UpdateApplicantComponent implements OnInit {
   private unsubscribe: Subject<void> = new Subject();
   @Output() submitted: EventEmitter<any> = new EventEmitter();
 
-  constructor(private toastr: ToastrService, private scholarshipService: ScholarshipService) {}
+  constructor(
+    private toastr: ToastrService,
+    private scholarshipService: ScholarshipService
+  ) {}
 
   ngOnInit() {
     this.formConfiguration = {

@@ -66,6 +66,11 @@ const appRoutes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes, { onSameUrlNavigation: 'reload' })],
   exports: [RouterModule],
-  providers: [HomeResolver, ScholarshipResolver, ApplicationResolver, ResetPasswordResolver]
+  providers: [
+    HomeResolver,
+    ScholarshipResolver,
+    ApplicationResolver,
+    ResetPasswordResolver
+  ]
 })
 export class AppRoutingModule {}

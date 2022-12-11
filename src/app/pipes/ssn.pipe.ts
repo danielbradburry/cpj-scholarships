@@ -55,7 +55,11 @@ export class SSNPipe {
     }
 
     for (let i = 0; i < indices.length; i++) {
-      value = this.insertCharacter(indices[i].character, value, indices[i].placement);
+      value = this.insertCharacter(
+        indices[i].character,
+        value,
+        indices[i].placement
+      );
     }
 
     return value;

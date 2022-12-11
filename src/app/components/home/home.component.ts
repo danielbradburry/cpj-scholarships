@@ -12,7 +12,10 @@ import { Subject } from 'rxjs';
 export class HomeComponent implements OnInit {
   program: any;
   private unsubscribe: Subject<void> = new Subject();
-  constructor(private scholarshipService: ScholarshipService, private route: ActivatedRoute) {
+  constructor(
+    private scholarshipService: ScholarshipService,
+    private route: ActivatedRoute
+  ) {
     this.route.data.pipe(takeUntil(this.unsubscribe)).subscribe(
       (response: any) => {
         if (response.data.program) {
@@ -29,9 +32,11 @@ export class HomeComponent implements OnInit {
       }
     );
 
-    this.scholarshipService.currentProgram.pipe(takeUntil(this.unsubscribe)).subscribe((data) => {
-      this.program = data;
-    });
+    this.scholarshipService.currentProgram
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((data) => {
+        this.program = data;
+      });
   }
 
   ngOnInit() {}

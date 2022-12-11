@@ -38,21 +38,29 @@ export class ApplicationComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.scholarshipService.currentApplicant.pipe(takeUntil(this.unsubscribe)).subscribe((data) => {
-      this.applicant = data;
-    });
+    this.scholarshipService.currentApplicant
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((data) => {
+        this.applicant = data;
+      });
 
-    this.scholarshipService.currentApplication.pipe(takeUntil(this.unsubscribe)).subscribe((data) => {
-      this.application = data;
-    });
+    this.scholarshipService.currentApplication
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((data) => {
+        this.application = data;
+      });
 
-    this.scholarshipService.currentProgram.pipe(takeUntil(this.unsubscribe)).subscribe((data) => {
-      this.program = data;
-    });
+    this.scholarshipService.currentProgram
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((data) => {
+        this.program = data;
+      });
 
-    this.scholarshipService.currentScholarship.pipe(takeUntil(this.unsubscribe)).subscribe((data) => {
-      this.scholarship = data;
-    });
+    this.scholarshipService.currentScholarship
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((data) => {
+        this.scholarship = data;
+      });
 
     this.route.data.pipe(takeUntil(this.unsubscribe)).subscribe(
       (response: any) => {
@@ -60,15 +68,25 @@ export class ApplicationComponent implements OnInit {
           this.scholarshipService.setProgram(response.data.program);
           this.scholarshipService.setScholarship(response.data.scholarship);
           this.scholarshipService.setApplication(response.data.application);
-          if (!response.data?.application?.applicationID || !this.scholarship.isOpen) {
-            this.router.navigate([`/${this.scholarship.url}`], { queryParamsHandling: 'preserve' });
+          if (
+            !response.data?.application?.applicationID ||
+            !this.scholarship.isOpen
+          ) {
+            this.router.navigate([`/${this.scholarship.url}`], {
+              queryParamsHandling: 'preserve'
+            });
           }
           this.scholarship.steps.forEach((step) => {
             if (step.form) {
-              step.formGroup = this.formsService.createFormGroup(step.form.applicationFormQuestions);
+              step.formGroup = this.formsService.createFormGroup(
+                step.form.applicationFormQuestions
+              );
             }
           });
-          this.scholarship.requirements = this.sanitized.bypassSecurityTrustHtml(this.scholarship.requirements);
+          this.scholarship.requirements =
+            this.sanitized.bypassSecurityTrustHtml(
+              this.scholarship.requirements
+            );
           this.scholarship.steps.push({
             name: 'Review & Submit'
           });
@@ -101,7 +119,9 @@ export class ApplicationComponent implements OnInit {
 
   goRight() {
     if (this.currentStep.form) {
-      const continueButton = document.querySelector('#applicationFormSubmit') as HTMLElement;
+      const continueButton = document.querySelector(
+        '#applicationFormSubmit'
+      ) as HTMLElement;
       continueButton.click();
     } else {
       this.goRightFn();
@@ -117,7 +137,9 @@ export class ApplicationComponent implements OnInit {
 
   saveForLater() {
     if (this.currentStep.form) {
-      const finishLaterButton = document.querySelector('#applicationFormFinishLater') as HTMLElement;
+      const finishLaterButton = document.querySelector(
+        '#applicationFormFinishLater'
+      ) as HTMLElement;
       finishLaterButton.click();
     } else {
       this.router.navigate(['/'], { queryParamsHandling: 'preserve' });
@@ -143,7 +165,13 @@ export class ApplicationComponent implements OnInit {
       this.progressAdjustment = '0';
       return;
     }
-    this.progressAdjustment = `calc(${100 - Math.round((this.currentStepIndex / (this.scholarship.steps.length - 1)) * 100) + '%'} - 10px)`;
+    this.progressAdjustment = `calc(${
+      100 -
+      Math.round(
+        (this.currentStepIndex / (this.scholarship.steps.length - 1)) * 100
+      ) +
+      '%'
+    } - 10px)`;
   }
 
   uploadFile(file) {
@@ -161,7 +189,12 @@ export class ApplicationComponent implements OnInit {
 
     this.submitting = true;
     this.scholarshipService
-      .uploadFile(this.program.url, this.scholarship.url, this.currentStep.folder.documentFolderID, formData)
+      .uploadFile(
+        this.program.url,
+        this.scholarship.url,
+        this.currentStep.folder.documentFolderID,
+        formData
+      )
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(
         (event: any) => {
@@ -174,11 +207,16 @@ export class ApplicationComponent implements OnInit {
             } else {
               if (event.ok && event.body.applicationUpload) {
                 if (event.body.applicationUpload.error) {
-                  this.toastr.error(event.body.applicationUpload.error, 'Error!');
+                  this.toastr.error(
+                    event.body.applicationUpload.error,
+                    'Error!'
+                  );
                   return;
                 }
 
-                this.currentStep.folder.applicationUploads.push(event.body.applicationUpload);
+                this.currentStep.folder.applicationUploads.push(
+                  event.body.applicationUpload
+                );
               } else {
                 this.toastr.error('File failed to upload', 'Error!');
               }
@@ -199,11 +237,19 @@ export class ApplicationComponent implements OnInit {
     this.submitting = true;
     file.removing = true;
     this.scholarshipService
-      .removeFile(this.program.url, this.scholarship.url, this.currentStep.folder.documentFolderID, file)
+      .removeFile(
+        this.program.url,
+        this.scholarship.url,
+        this.currentStep.folder.documentFolderID,
+        file
+      )
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(
         (event: any) => {
-          this.currentStep.folder.applicationUploads.splice(this.currentStep.folder.applicationUploads.indexOf(file), 1);
+          this.currentStep.folder.applicationUploads.splice(
+            this.currentStep.folder.applicationUploads.indexOf(file),
+            1
+          );
         },
         (error: HttpErrorResponse) => {
           this.toastr.error(error.message, 'Error!');
@@ -225,9 +271,14 @@ export class ApplicationComponent implements OnInit {
     }
 
     this.scholarshipService
-      .updateFormResponse(this.program.url, this.scholarship.url, this.currentStep.form.applicationFormID, {
-        applicationForm: form.value
-      })
+      .updateFormResponse(
+        this.program.url,
+        this.scholarship.url,
+        this.currentStep.form.applicationFormID,
+        {
+          applicationForm: form.value
+        }
+      )
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(
         (response: any) => {
@@ -258,9 +309,14 @@ export class ApplicationComponent implements OnInit {
     }
 
     this.scholarshipService
-      .updateFormResponse(this.program.url, this.scholarship.url, this.currentStep.form.applicationFormID, {
-        applicationForm: form.value
-      })
+      .updateFormResponse(
+        this.program.url,
+        this.scholarship.url,
+        this.currentStep.form.applicationFormID,
+        {
+          applicationForm: form.value
+        }
+      )
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(
         (response: any) => {
@@ -293,8 +349,13 @@ export class ApplicationComponent implements OnInit {
           .subscribe(
             (response: any) => {
               if (response.valid) {
-                this.router.navigate(['/'], { queryParamsHandling: 'preserve' });
-                this.toastr.success('Your application has been submitted.', 'Success!');
+                this.router.navigate(['/'], {
+                  queryParamsHandling: 'preserve'
+                });
+                this.toastr.success(
+                  'Your application has been submitted.',
+                  'Success!'
+                );
               } else {
                 if (response.error) {
                   this.toastr.error(response.error, 'Error!');

@@ -122,7 +122,10 @@
           *ngFor="let error of formGroup.controls[question.name].errors | keys"
         >
           <span
-            *ngIf="formGroup.controls[question.name].touched && question[error.key + 'ErrorLabel']"
+            *ngIf="
+              formGroup.controls[question.name].touched &&
+              question[error.key + 'ErrorLabel']
+            "
             class="inputTip"
             >{{ question[error.key + 'ErrorLabel'] }}</span
           >

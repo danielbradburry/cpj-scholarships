@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectorRef
+} from '@angular/core';
 import { FormsService } from './forms.service';
 import { UntypedFormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
@@ -20,16 +27,23 @@ export class ApplicationFormComponent implements OnInit {
   @Output() finishLater: EventEmitter<any> = new EventEmitter();
   private unsubscribe: Subject<void> = new Subject();
 
-  constructor(private formsService: FormsService, private cdRef: ChangeDetectorRef) {}
+  constructor(
+    private formsService: FormsService,
+    private cdRef: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
-    this.formGroup.valueChanges.pipe(takeUntil(this.unsubscribe)).subscribe((value) => {
-      this.updatedForm.emit(value);
-    });
+    this.formGroup.valueChanges
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((value) => {
+        this.updatedForm.emit(value);
+      });
 
     this.form.applicationFormQuestions.forEach((question) => {
       if (question.type === 'select') {
-        this.formGroup.controls[question.name].setValue(this.formGroup.value[question.name] || question.options[0].data);
+        this.formGroup.controls[question.name].setValue(
+          this.formGroup.value[question.name] || question.options[0].data
+        );
       }
     });
 

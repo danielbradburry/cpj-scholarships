@@ -62,7 +62,10 @@
       Maximum file size: <span>{{ folder.maxFileSize }}MB</span>
     </li>
     <li>
-      <span>{{ folder.applicationUploads.length }} of {{ folder.maxUploads }} files uploaded</span>
+      <span
+        >{{ folder.applicationUploads.length }} of {{ folder.maxUploads }} files
+        uploaded</span
+      >
       &nbsp;
       <span
         *ngIf="folder.minUploads > 0"

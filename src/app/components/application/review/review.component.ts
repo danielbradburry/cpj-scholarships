@@ -15,7 +15,10 @@ export class ApplicationReviewComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.steps = this.scholarship.steps.slice(0, this.scholarship.steps.length - 1);
+    this.steps = this.scholarship.steps.slice(
+      0,
+      this.scholarship.steps.length - 1
+    );
   }
 
   goToStep(index) {

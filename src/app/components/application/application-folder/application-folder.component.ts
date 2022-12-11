@@ -44,7 +44,8 @@ export class ApplicationFolderComponent implements OnInit {
 
   uploadFile(upload: any) {
     const limit =
-      this.folder.maxUploads - this.folder.applicationUploads.length > upload.target.files.length
+      this.folder.maxUploads - this.folder.applicationUploads.length >
+      upload.target.files.length
         ? upload.target.files.length
         : this.folder.maxUploads - this.folder.applicationUploads.length;
 

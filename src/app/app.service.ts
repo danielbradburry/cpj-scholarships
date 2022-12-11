@@ -33,54 +33,91 @@ export class ScholarshipService {
   }
 
   createApplicant(form) {
-    return this.http.post(`${environment.apiDomain}scholarship-programs/applicants`, form);
+    return this.http.post(
+      `${environment.apiDomain}scholarship-programs/applicants`,
+      form
+    );
   }
 
   updateApplicant(form) {
-    return this.http.post(`${environment.apiDomain}scholarship-programs/applicants/update`, form);
+    return this.http.post(
+      `${environment.apiDomain}scholarship-programs/applicants/update`,
+      form
+    );
   }
 
   getPasswordKey(scholarshipProgramURL, key) {
-    return this.http.get(`${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/password/reset/${key}`);
+    return this.http.get(
+      `${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/password/reset/${key}`
+    );
   }
 
   changePassword(form) {
-    return this.http.post(`${environment.apiDomain}scholarship-programs/applicants/password`, form);
+    return this.http.post(
+      `${environment.apiDomain}scholarship-programs/applicants/password`,
+      form
+    );
   }
 
   changePasswordByEmail(form) {
-    return this.http.post(`${environment.apiDomain}scholarship-programs/password/reset/by-email`, form);
+    return this.http.post(
+      `${environment.apiDomain}scholarship-programs/password/reset/by-email`,
+      form
+    );
   }
 
   login(form) {
-    return this.http.post(`${environment.apiDomain}scholarship-programs/applicants/login`, form);
+    return this.http.post(
+      `${environment.apiDomain}scholarship-programs/applicants/login`,
+      form
+    );
   }
 
   logout(form) {
-    return this.http.post(`${environment.apiDomain}scholarship-programs/applicants/logout`, form);
+    return this.http.post(
+      `${environment.apiDomain}scholarship-programs/applicants/logout`,
+      form
+    );
   }
 
   resetPassword(scholarshipProgramURL, form) {
-    return this.http.post(`${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/password/reset`, form);
+    return this.http.post(
+      `${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/password/reset`,
+      form
+    );
   }
 
   getScholarshipProgramForView(scholarshipProgramURL) {
-    return this.http.get(`${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/view`);
+    return this.http.get(
+      `${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/view`
+    );
   }
 
   getScholarshipForView(scholarshipProgramURL, scholarshipURL) {
-    return this.http.get(`${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/view/${scholarshipURL}`);
+    return this.http.get(
+      `${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/view/${scholarshipURL}`
+    );
   }
 
   getScholarshipApplication(scholarshipProgramURL, scholarshipURL) {
-    return this.http.get(`${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/application`);
+    return this.http.get(
+      `${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/application`
+    );
   }
 
   createApplication(scholarshipProgramURL, scholarshipURL) {
-    return this.http.post(`${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/applications`, {});
+    return this.http.post(
+      `${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/applications`,
+      {}
+    );
   }
 
-  updateFormResponse(scholarshipProgramURL, scholarshipURL, applicationFormID, form) {
+  updateFormResponse(
+    scholarshipProgramURL,
+    scholarshipURL,
+    applicationFormID,
+    form
+  ) {
     return this.http.post(
       `${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/applications/application-forms/${applicationFormID}`,
       form
@@ -103,6 +140,9 @@ export class ScholarshipService {
   }
 
   submitApplication(scholarshipProgramURL, scholarshipURL) {
-    return this.http.post(`${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/applications/submit`, {});
+    return this.http.post(
+      `${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/applications/submit`,
+      {}
+    );
   }
 }

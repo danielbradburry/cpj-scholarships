@@ -1,4 +1,10 @@
-import { Component, OnInit, ComponentFactoryResolver, ViewChild, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ComponentFactoryResolver,
+  ViewChild,
+  AfterViewInit
+} from '@angular/core';
 import { ScholarshipService } from '../../app.service';
 import { ViewRefDirective } from '../../shared/directives/view-ref.directive';
 import { ChangePasswordComponent } from './password/password.component';
@@ -47,13 +53,17 @@ export class AuthenticationComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.state = 'login';
 
-    this.scholarshipService.currentProgram.pipe(takeUntil(this.unsubscribe)).subscribe((data) => {
-      this.program = data;
-    });
+    this.scholarshipService.currentProgram
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((data) => {
+        this.program = data;
+      });
 
-    this.scholarshipService.currentApplicant.pipe(takeUntil(this.unsubscribe)).subscribe((data) => {
-      this.applicant = data;
-    });
+    this.scholarshipService.currentApplicant
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((data) => {
+        this.applicant = data;
+      });
 
     this.route.data.pipe(takeUntil(this.unsubscribe)).subscribe(
       (response: any) => {
@@ -71,23 +81,27 @@ export class AuthenticationComponent implements OnInit, AfterViewInit {
       }
     );
 
-    this.route.queryParams.pipe(takeUntil(this.unsubscribe)).subscribe((params) => {
-      this.scholarshipKeyQueryParam = params.scholarshipKey;
-    });
+    this.route.queryParams
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((params) => {
+        this.scholarshipKeyQueryParam = params.scholarshipKey;
+      });
   }
 
   ngAfterViewInit() {
-    this.scholarshipService.currentApplicant.pipe(takeUntil(this.unsubscribe)).subscribe((applicant) => {
-      this.applicant = applicant;
-      if (applicant && !this.currentComponent) {
-        setTimeout(() => {
-          this.changeComponent(this.tabs[0]);
-        }, 0);
-      }
-      if (!applicant) {
-        this.currentComponent = null;
-      }
-    });
+    this.scholarshipService.currentApplicant
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((applicant) => {
+        this.applicant = applicant;
+        if (applicant && !this.currentComponent) {
+          setTimeout(() => {
+            this.changeComponent(this.tabs[0]);
+          }, 0);
+        }
+        if (!applicant) {
+          this.currentComponent = null;
+        }
+      });
   }
 
   changeComponent(tab) {
@@ -96,16 +110,22 @@ export class AuthenticationComponent implements OnInit, AfterViewInit {
     });
     tab.active = true;
     this.vref.viewContainerRef.clear();
-    let componentFactory = this.componentFactoryResolver.resolveComponentFactory(tab.component);
-    let componentRef = this.vref.viewContainerRef.createComponent(componentFactory);
+    let componentFactory =
+      this.componentFactoryResolver.resolveComponentFactory(tab.component);
+    let componentRef =
+      this.vref.viewContainerRef.createComponent(componentFactory);
     componentRef.instance.applicant = this.applicant;
     componentRef.instance.reloading = this.reloading;
-    componentRef.instance.scholarships = this.program.scholarships.filter((scholarship) => {
-      return scholarship.status !== 'not-started';
-    });
-    componentRef.instance.submitted.pipe(takeUntil(this.unsubscribe)).subscribe(() => {
-      this.changeComponent(this.tabs[0]);
-    });
+    componentRef.instance.scholarships = this.program.scholarships.filter(
+      (scholarship) => {
+        return scholarship.status !== 'not-started';
+      }
+    );
+    componentRef.instance.submitted
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe(() => {
+        this.changeComponent(this.tabs[0]);
+      });
   }
 
   changeToLogIn() {
@@ -144,7 +164,10 @@ export class AuthenticationComponent implements OnInit, AfterViewInit {
   getScholarshipKey() {
     if (environment.production) {
       const parts = window.location.hostname.split('.');
-      if (parts.length === 4 && window.location.hostname.includes('.scholarships.cpjam.com')) {
+      if (
+        parts.length === 4 &&
+        window.location.hostname.includes('.scholarships.cpjam.com')
+      ) {
         return parts[0];
       }
     } else {

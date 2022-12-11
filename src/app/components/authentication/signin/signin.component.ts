@@ -105,7 +105,8 @@ export class SigninComponent implements OnInit {
                 required: true,
                 value: '',
                 requiredErrorLabel: 'Password required',
-                patternErrorLabel: 'Minimum 7 characters, requires upper, lower and numeric'
+                patternErrorLabel:
+                  'Minimum 7 characters, requires upper, lower and numeric'
               },
               {
                 class: 'form-group col-sm-6',
@@ -138,20 +139,32 @@ export class SigninComponent implements OnInit {
       .subscribe(
         (response: any) => {
           if (response.applicant && response.token) {
-            window.localStorage.setItem(this.constants.storageKey, response.token);
+            window.localStorage.setItem(
+              this.constants.storageKey,
+              response.token
+            );
             this.toastr.success('Logging you in...', 'Account created!');
             this.scholarshipService.setApplicant(response.applicant);
-            const intendedScholarship = window.sessionStorage.getItem(this.constants.intendedScholarshipKey);
+            const intendedScholarship = window.sessionStorage.getItem(
+              this.constants.intendedScholarshipKey
+            );
             if (intendedScholarship) {
-              this.router.navigate([`/${intendedScholarship}/application`], { queryParamsHandling: 'preserve' });
-              window.sessionStorage.removeItem(this.constants.intendedScholarshipKey);
+              this.router.navigate([`/${intendedScholarship}/application`], {
+                queryParamsHandling: 'preserve'
+              });
+              window.sessionStorage.removeItem(
+                this.constants.intendedScholarshipKey
+              );
             }
           } else {
             if (response.error) {
               this.toastr.error(response.error, 'Error!');
             }
             if (response.duplicate) {
-              this.toastr.error('Another account with this email address already exists.', 'Duplicate User Found!');
+              this.toastr.error(
+                'Another account with this email address already exists.',
+                'Duplicate User Found!'
+              );
             }
           }
         },

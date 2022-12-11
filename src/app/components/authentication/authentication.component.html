@@ -5,7 +5,10 @@
 
 <div *ngIf="!applicant">
   <h3>Welcome!</h3>
-  <p>In order to apply to scholarships through this online platform, applicants are required to first create an online account.</p>
+  <p>
+    In order to apply to scholarships through this online platform, applicants
+    are required to first create an online account.
+  </p>
   <app-login
     *ngIf="state === 'login'"
     (changeToSignIn)="changeToSignIn()"

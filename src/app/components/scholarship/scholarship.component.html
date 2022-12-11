@@ -38,7 +38,11 @@
   </label>
   <label
     >Deadline:
-    <p [innerText]="scholarship.isOpen ? scholarship.applicationEndDate : 'Ended'"></p>
+    <p
+      [innerText]="
+        scholarship.isOpen ? scholarship.applicationEndDate : 'Ended'
+      "
+    ></p>
   </label>
   <p
     *ngIf="scholarship.requirements"

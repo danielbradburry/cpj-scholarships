@@ -14,21 +14,29 @@ export class ApplicationResolver implements Resolve<any> {
   resolve(route: ActivatedRouteSnapshot) {
     const scholarshipProgramKey = this.getScholarshipKey(route);
 
-    return this.scholarshipService.getScholarshipApplication(scholarshipProgramKey, route.params['scholarshipURL']).pipe(
-      catchError((error) => {
-        if (error.status === 404) {
-          window.location.href = 'https://cpjam.com';
-        } else {
-          return of(null);
-        }
-      })
-    );
+    return this.scholarshipService
+      .getScholarshipApplication(
+        scholarshipProgramKey,
+        route.params['scholarshipURL']
+      )
+      .pipe(
+        catchError((error) => {
+          if (error.status === 404) {
+            window.location.href = 'https://cpjam.com';
+          } else {
+            return of(null);
+          }
+        })
+      );
   }
 
   getScholarshipKey(route) {
     if (environment.production) {
       const parts = window.location.hostname.split('.');
-      if (parts.length === 4 && window.location.hostname.includes('.scholarships.cpjam.com')) {
+      if (
+        parts.length === 4 &&
+        window.location.hostname.includes('.scholarships.cpjam.com')
+      ) {
         return parts[0];
       }
     } else {

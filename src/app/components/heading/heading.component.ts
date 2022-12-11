@@ -28,9 +28,11 @@ export class ScholarshipHeadingComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.scholarshipService.currentApplicant.pipe(takeUntil(this.unsubscribe)).subscribe((applicant) => {
-      this.applicant = applicant;
-    });
+    this.scholarshipService.currentApplicant
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((applicant) => {
+        this.applicant = applicant;
+      });
   }
 
   logout(event) {
@@ -53,9 +55,11 @@ export class ScholarshipHeadingComponent implements OnInit {
 
   uiLoginProcess() {
     window.localStorage.removeItem(this.constants.storageKey);
-    this.router.navigate(['/'], { queryParamsHandling: 'preserve' }).then(() => {
-      this.scholarshipService.setApplicant(null);
-    });
+    this.router
+      .navigate(['/'], { queryParamsHandling: 'preserve' })
+      .then(() => {
+        this.scholarshipService.setApplicant(null);
+      });
     this.toastr.success('You have been logged out of the system', 'Success!');
   }
 

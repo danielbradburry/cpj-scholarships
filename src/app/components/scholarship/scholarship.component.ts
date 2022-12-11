@@ -33,21 +33,29 @@ export class ScholarshipComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.scholarshipService.currentApplicant.pipe(takeUntil(this.unsubscribe)).subscribe((data) => {
-      this.applicant = data;
-    });
+    this.scholarshipService.currentApplicant
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((data) => {
+        this.applicant = data;
+      });
 
-    this.scholarshipService.currentApplication.pipe(takeUntil(this.unsubscribe)).subscribe((data) => {
-      this.application = data;
-    });
+    this.scholarshipService.currentApplication
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((data) => {
+        this.application = data;
+      });
 
-    this.scholarshipService.currentProgram.pipe(takeUntil(this.unsubscribe)).subscribe((data) => {
-      this.program = data;
-    });
+    this.scholarshipService.currentProgram
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((data) => {
+        this.program = data;
+      });
 
-    this.scholarshipService.currentScholarship.pipe(takeUntil(this.unsubscribe)).subscribe((data) => {
-      this.scholarship = data;
-    });
+    this.scholarshipService.currentScholarship
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((data) => {
+        this.scholarship = data;
+      });
 
     this.route.data.pipe(takeUntil(this.unsubscribe)).subscribe(
       (response: any) => {
@@ -55,7 +63,9 @@ export class ScholarshipComponent implements OnInit {
           this.scholarshipService.setProgram(response.data.program);
           this.scholarshipService.setScholarship(response.data.scholarship);
           this.scholarship.requirements = this.scholarship.requirements
-            ? this.sanitized.bypassSecurityTrustHtml(this.scholarship.requirements)
+            ? this.sanitized.bypassSecurityTrustHtml(
+                this.scholarship.requirements
+              )
             : null;
         } else {
           this.redirectToMainSite();
@@ -102,7 +112,10 @@ export class ScholarshipComponent implements OnInit {
           );
       }
     } else {
-      window.sessionStorage.setItem(this.constants.intendedScholarshipKey, this.scholarship.url);
+      window.sessionStorage.setItem(
+        this.constants.intendedScholarshipKey,
+        this.scholarship.url
+      );
       this.redirectToAccount();
     }
   }
@@ -112,7 +125,9 @@ export class ScholarshipComponent implements OnInit {
   }
 
   redirectToApplication() {
-    this.router.navigate([`/${this.scholarship.url}/application`], { queryParamsHandling: 'preserve' });
+    this.router.navigate([`/${this.scholarship.url}/application`], {
+      queryParamsHandling: 'preserve'
+    });
   }
 
   redirectToMainSite() {

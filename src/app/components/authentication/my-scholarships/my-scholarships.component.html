@@ -1,6 +1,8 @@
 <div class="scholarships">
   <h4>My Scholarship/Grant Opportunities</h4>
-  <p *ngIf="!scholarships?.length && !reloading">You currently have no scholarship applications in progress.</p>
+  <p *ngIf="!scholarships?.length && !reloading">
+    You currently have no scholarship applications in progress.
+  </p>
   <a
     class="scholarship"
     *ngFor="let scholarship of scholarships"
@@ -32,7 +34,9 @@
       <span>Deadline:</span>
       <span
         class="status"
-        [innerText]="scholarship.isOpen ? scholarship.applicationEndDate : 'Ended'"
+        [innerText]="
+          scholarship.isOpen ? scholarship.applicationEndDate : 'Ended'
+        "
       ></span>
     </div>
   </a>

@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
 import { ConstantsService } from '../../../shared/services/constants.service';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
+import {
+  UntypedFormGroup,
+  UntypedFormControl,
+  Validators
+} from '@angular/forms';
 import * as moment from 'moment';
 
 @Injectable()
 export class FormsService {
-  constructor(private constants: ConstantsService, private ngbDateParserFormatter: NgbDateParserFormatter) {}
+  constructor(
+    private constants: ConstantsService,
+    private ngbDateParserFormatter: NgbDateParserFormatter
+  ) {}
 
   public createFormGroup(source) {
     var self = this,
@@ -86,18 +93,28 @@ export class FormsService {
 
   prepareFormGroupValues(formGroup) {
     for (let property in formGroup.value) {
-      if (typeof formGroup.value[property] === 'object' && formGroup.value[property]) {
+      if (
+        typeof formGroup.value[property] === 'object' &&
+        formGroup.value[property]
+      ) {
         let keys = Object.keys(property);
 
-        if (keys.indexOf('month') !== 1 && keys.indexOf('day') !== 1 && keys.indexOf('year') !== 1) {
-          formGroup.value[property] = this.convertValueToDate(formGroup.value[property]);
+        if (
+          keys.indexOf('month') !== 1 &&
+          keys.indexOf('day') !== 1 &&
+          keys.indexOf('year') !== 1
+        ) {
+          formGroup.value[property] = this.convertValueToDate(
+            formGroup.value[property]
+          );
         }
       }
       if (typeof formGroup.value[property] === 'number') {
         formGroup.value[property] = formGroup.value[property].toString();
       }
 
-      formGroup.value[property] = formGroup.value[property] !== null ? formGroup.value[property] : '';
+      formGroup.value[property] =
+        formGroup.value[property] !== null ? formGroup.value[property] : '';
     }
 
     return formGroup;

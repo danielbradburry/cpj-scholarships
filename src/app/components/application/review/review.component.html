@@ -3,7 +3,10 @@
   <div
     class="review"
     *ngFor="let step of steps; let i = index"
-    [class.hide]="(!step.form || step.form?.hideFromReview) && (!step.folder || step.folder?.hideFromReview)"
+    [class.hide]="
+      (!step.form || step.form?.hideFromReview) &&
+      (!step.folder || step.folder?.hideFromReview)
+    "
   >
     <h4>
       <button

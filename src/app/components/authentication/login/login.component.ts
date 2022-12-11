@@ -83,14 +83,25 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (response: any) => {
           if (response.token) {
-            window.localStorage.setItem(this.constants.storageKey, response.token);
+            window.localStorage.setItem(
+              this.constants.storageKey,
+              response.token
+            );
             this.success = true;
-            const intendedScholarship = window.sessionStorage.getItem(this.constants.intendedScholarshipKey);
+            const intendedScholarship = window.sessionStorage.getItem(
+              this.constants.intendedScholarshipKey
+            );
             if (intendedScholarship) {
-              this.router.navigate([`/${intendedScholarship}/application`], { queryParamsHandling: 'preserve' }).then(() => {
-                this.scholarshipService.setApplicant(response.applicant);
-              });
-              window.sessionStorage.removeItem(this.constants.intendedScholarshipKey);
+              this.router
+                .navigate([`/${intendedScholarship}/application`], {
+                  queryParamsHandling: 'preserve'
+                })
+                .then(() => {
+                  this.scholarshipService.setApplicant(response.applicant);
+                });
+              window.sessionStorage.removeItem(
+                this.constants.intendedScholarshipKey
+              );
             } else {
               this.requestLoginReload.emit(true);
               this.scholarshipService.setApplicant(response.applicant);

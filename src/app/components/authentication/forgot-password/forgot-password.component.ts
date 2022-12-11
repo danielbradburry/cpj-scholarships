@@ -19,12 +19,18 @@ export class ForgotPasswordComponent implements OnInit {
   program: any;
   private unsubscribe: Subject<void> = new Subject();
 
-  constructor(public activeModal: NgbActiveModal, private toastr: ToastrService, private scholarshipService: ScholarshipService) {}
+  constructor(
+    public activeModal: NgbActiveModal,
+    private toastr: ToastrService,
+    private scholarshipService: ScholarshipService
+  ) {}
 
   ngOnInit() {
-    this.scholarshipService.currentProgram.pipe(takeUntil(this.unsubscribe)).subscribe((data) => {
-      this.program = data;
-    });
+    this.scholarshipService.currentProgram
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((data) => {
+        this.program = data;
+      });
 
     this.formConfiguration = {
       formElements: {

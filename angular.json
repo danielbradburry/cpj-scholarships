@@ -23,7 +23,13 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/assets", "src/favicon.ico", "src/favicon-32x32.png", "src/favicon-16x16.png", "src/manifest.json"],
+            "assets": [
+              "src/assets",
+              "src/favicon.ico",
+              "src/favicon-32x32.png",
+              "src/favicon-16x16.png",
+              "src/manifest.json"
+            ],
             "styles": ["src/sass/styles.scss"],
             "scripts": []
           },

@@ -5,10 +5,19 @@
   >
     <ngb-progressbar
       type="primary"
-      [value]="((upload.uploadProgress.loaded || 0) / (upload.uploadProgress.total || 1)) * 100"
+      [value]="
+        ((upload.uploadProgress.loaded || 0) /
+          (upload.uploadProgress.total || 1)) *
+        100
+      "
       [striped]="true"
       height="22px"
-      >{{ upload.name }} {{ convertToNumber((upload.uploadProgress.loaded / upload.uploadProgress.total) * 100) }}%</ngb-progressbar
+      >{{ upload.name }}
+      {{
+        convertToNumber(
+          (upload.uploadProgress.loaded / upload.uploadProgress.total) * 100
+        )
+      }}%</ngb-progressbar
     >
   </div>
 </div>

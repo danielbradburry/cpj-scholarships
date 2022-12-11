@@ -5,6 +5,7 @@ import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmService } from '../../../shared/components/confirm/confirm.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { delay } from 'lodash';
 
 @Component({
   selector: 'auto-form',
@@ -169,6 +170,12 @@ export class AutoFormComponent implements OnInit {
   submit() {
     this.formGroup = this.formsService.prepareFormGroupValues(this.formGroup);
     this.formSubmit.emit(this.formGroup);
+    if (this.formGroup.value.password) {
+      delay(() => {
+        this.formGroup.controls.password.setValue('');
+        this.formGroup.controls.password.reset();
+      }, 500);
+    }
   }
 
   cancel(event) {

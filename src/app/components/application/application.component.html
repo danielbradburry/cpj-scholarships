@@ -45,7 +45,9 @@
       </div>
       <button
         (click)="goRight()"
-        [disabled]="submitting || (currentStep?.formGroup && !currentStep.formGroup.valid) || !applicant"
+        [disabled]="!applicant || submitting || (currentStep?.folder && 
+        currentStep?.folder?.minUploads && (currentStep?.folder?.applicationUploads?.length < currentStep?.folder?.minUploads)) ||
+          (currentStep?.form && !currentStep?.formGroup?.valid)"
         [class.hide]="currentStepIndex === (scholarship?.steps?.length - 1)"
       >
         <span
@@ -68,10 +70,12 @@
     <application-folder
       *ngIf="currentStep?.folder"
       [folder]="currentStep.folder"
+      [fileUploads]="fileUploads"
       (uploadedFile)="uploadFile($event)"
       (removedFile)="removeFile($event)"
       (continue)="goRight()"
       [submitting]="submitting"
+      [removing]="removing"
     ></application-folder>
     <app-review
       *ngIf="currentStepIndex === (scholarship?.steps.length - 1)"
@@ -80,7 +84,23 @@
       (finish)="finishNow()"
       [submitting]="submitting"
       (submit)="finalSubmit()"
+    ></app-review>
+    <div
+      class="buttons"
+      *ngIf="currentStepIndex !== (scholarship?.steps.length - 1)"
     >
-    </app-review>
+      <button
+        (click)="goRight()"
+        class="btn btn-confirm formSubmit"
+        [disabled]="(currentStep?.folder && 
+        currentStep?.folder?.minUploads && (currentStep?.folder?.applicationUploads?.length < currentStep?.folder?.minUploads)) ||
+          (currentStep?.form && !currentStep?.formGroup?.valid) ||
+          submitting"
+      >
+        <span>Continue</span>
+        <img *ngIf="submitting" class="loading" src="/assets/images/loading-confirm.gif" />
+        <i *ngIf="!submitting" class="fas fa-arrow-circle-right"></i>
+      </button>
+    </div>
   </div>
 </div>

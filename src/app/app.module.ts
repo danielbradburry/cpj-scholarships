@@ -32,6 +32,7 @@ import { ReviewComponent } from './components/scholarship/review/review.componen
 import { AutoFormComponent } from './shared/components/auto-form/auto-form.component';
 import { ConfirmComponent } from './shared/components/confirm/confirm.component';
 import { MiniProfileComponent } from './shared/components/mini-profile/mini-profile.component';
+import { UploadProgressComponent } from './shared/components/upload-progress/upload-progress.component';
 
 // Services
 import { ScholarshipService } from './app.service';
@@ -73,6 +74,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     SpinnerComponent,
     AutoFormComponent,
     ConfirmComponent,
+    UploadProgressComponent,
     EncodeUriPipe,
     SSNPipe,
     KeysPipe,

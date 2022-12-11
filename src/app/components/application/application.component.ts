@@ -19,10 +19,12 @@ export class ApplicationComponent implements OnInit {
   program: any;
   currentStep: any;
   currentStepIndex: number = 0;
+  fileUploads: any[] = [];
   progressAdjustment: string;
   applicant: any;
   application: any;
   submitting: boolean;
+  removing: boolean;
   math: any = Math;
   private unsubscribe: Subject<void> = new Subject();
   constructor(
@@ -163,6 +165,8 @@ export class ApplicationComponent implements OnInit {
     formData.append('file', selectedFile);
     formData.append('fileUploadName', selectedFile.name);
 
+    this.fileUploads.push(fileUpload);
+
     this.submitting = true;
     this.scholarshipService.uploadFile(
       this.program.url,
@@ -197,11 +201,13 @@ export class ApplicationComponent implements OnInit {
     })
     .add(() => {
       this.submitting = false;
+      this.fileUploads.splice(this.fileUploads.indexOf(fileUpload), 1);
     });
   }
 
   removeFile(file) {
     this.submitting = true;
+    file.removing = true;
     this.scholarshipService.removeFile(
       this.program.url,
       this.scholarship.url,
@@ -217,6 +223,7 @@ export class ApplicationComponent implements OnInit {
       })
       .add(() => {
         this.submitting = false;
+        file.removing = false;
       });
   }
 

@@ -17,6 +17,9 @@
   }
 
   .review {
+    &.hide {
+      display: none;
+    }
     .step-content {
       background: $offWhite;
       padding: 8px;

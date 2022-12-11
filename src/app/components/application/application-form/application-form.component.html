@@ -89,22 +89,16 @@
       </label>
     </div>
   </div>
-  <div class="buttons">
-    <button
-      (click)="submit()"
-      class="btn btn-confirm formSubmit"
-      id="applicationFormSubmit"
-      [disabled]="!formGroup.valid || submitting"
-    >
-      <span>Continue</span>
-      <img *ngIf="submitting" class="loading" src="/assets/images/loading-confirm.gif" />
-      <i *ngIf="!submitting" class="fas fa-arrow-circle-right"></i>
-    </button>
-    <button
-      (click)="submitFinishLater()"
-      class="hidden"
-      id="applicationFormFinishLater"
-      [disabled]="!formGroup.valid || submitting"
-    ></button>
-  </div>
+  <button
+    (click)="submit()"
+    class="hidden"
+    id="applicationFormSubmit"
+    [disabled]="!formGroup.valid || submitting"
+  ></button>
+  <button
+    (click)="submitFinishLater()"
+    class="hidden"
+    id="applicationFormFinishLater"
+    [disabled]="!formGroup.valid || submitting"
+  ></button>
 </div>

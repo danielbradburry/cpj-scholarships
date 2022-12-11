@@ -11,8 +11,8 @@ export class ApplicationFolderComponent implements OnInit {
 
   uploadProgress: any;
   accepts: string;
-  fileUploads: any[] = [];
   fileTypeRestriction: string;
+  @Input() fileUploads: any[];
   @Input() folder: any;
   @Input() applicationID: string;
   @Input() submitting: boolean;

@@ -3,6 +3,7 @@
   <div
     class="review"
     *ngFor="let step of steps; let i = index"
+    [class.hide]="(!step.form || step.form?.hideFromReview) && (!step.folder || step.folder?.hideFromReview)"
   >
     <h4>
       <button
@@ -11,14 +12,14 @@
       ><i class="fas fa-pencil-alt"></i></button>
       {{step.name}}
     </h4>
-    <div class="step-content" *ngIf="step.form">
+    <div class="step-content" *ngIf="step.form && !step.hideFromReview">
       <div class="question" *ngFor="let question of step.form.applicationFormQuestions">
         <label>{{question.label}}:
           <span>{{step.formGroup.value[question.name]}}</span>
         </label>
       </div>
     </div>
-    <div class="step-content" *ngIf="step.folder">
+    <div class="step-content" *ngIf="step.folder && !step.hideFromReview">
       <p *ngIf="!step.folder.applicationUploads?.length" class="no-border">
         No files uploaded.
       </p>

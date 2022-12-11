@@ -7,6 +7,7 @@ import { ForgotPasswordComponent } from '../forgot-password/forgot-password.comp
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private router: Router,
+    private toastr: ToastrService,
     private scholarshipService: ScholarshipService,
     private constants: ConstantsService
   ) { }
@@ -50,12 +52,11 @@ export class LoginComponent implements OnInit {
             class: 'form-group col-sm-12',
             label: 'Password',
             name: 'password',
-            type: 'password',
+            type: 'password-any',
             required: true,
             value: '',
             autoComplete: 'off',
-            requiredErrorLabel: 'Password required',
-            patternErrorLabel: 'Minimum 7 characters, requires upper, lower and numeric'
+            requiredErrorLabel: 'Password required'
           }]
         }]
       },
@@ -91,6 +92,7 @@ export class LoginComponent implements OnInit {
           if (response.error) {
             this.error = response.error;
             this.submitting = false;
+            this.toastr.error(response.error, 'Error!');
           }
         }
       },

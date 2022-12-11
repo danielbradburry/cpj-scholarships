@@ -9,9 +9,9 @@
     id="upload"
     (change)="uploadFile($event)"
     accept="{{fileTypeRestriction}}"/>
-  <upload-progress *ngIf="fileUploads.length" [fileUploads]="fileUploads"></upload-progress>
 
   <div class="files">
+    <upload-progress *ngIf="fileUploads.length" [fileUploads]="fileUploads"></upload-progress>
     <div
       class="file"
       *ngFor="let file of folder.applicationUploads; let i = index"
@@ -22,7 +22,10 @@
         placement="top"
         ngbTooltip="Remove"
         triggers="hover"
-      ><i class="fas fa-trash-alt"></i></button>
+      >
+        <img *ngIf="file.removing" class="loading" src="/assets/images/loading-danger.gif" />
+        <i *ngIf="!file.removing" class="fas fa-trash-alt"></i>
+      </button>
       <div class="name">
         <span>{{ file.name }}</span>
         <span>Size: {{ file.size }}</span>
@@ -45,16 +48,4 @@
       >({{ folder.minUploads }} required)</span>
     </li>
   </ul>
-  <div class="buttons">
-    <button
-      (click)="continueFn()"
-      class="btn btn-confirm formSubmit"
-      id="applicationFormSubmit"
-      [disabled]="(folder.minUploads && (folder.applicationUploads.length < folder.minUploads)) || submitting"
-    >
-      <span>Continue</span>
-      <img *ngIf="submitting" class="loading" src="/assets/images/loading-confirm.gif" />
-      <i *ngIf="!submitting" class="fas fa-arrow-circle-right"></i>
-    </button>
-  </div>
 </div>

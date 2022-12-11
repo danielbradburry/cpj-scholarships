@@ -22,6 +22,9 @@ h3 {
 .current-step-content {
   border: 2px solid $grayLight;
   padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .visual-progress-container {

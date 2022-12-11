@@ -14,34 +14,58 @@ import { ApplicationResolver } from './components/application/application.resolv
 import { ResetPasswordResolver } from './components/reset-password/reset-password.resolver';
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent, runGuardsAndResolvers: 'always', resolve: {
-    data: HomeResolver
-  }},
-  { path: 'account', component: AuthenticationComponent, runGuardsAndResolvers: 'always', resolve: {
-    data: HomeResolver
-  }},
-  { path: 'help', component: HelpComponent, runGuardsAndResolvers: 'always', resolve: {
-    data: HomeResolver
-  }},
-  { path: ':scholarshipURL', component: ScholarshipComponent, runGuardsAndResolvers: 'always', resolve: {
-    data: ScholarshipResolver
-  }},
-  { path: ':scholarshipURL/application', component: ApplicationComponent, runGuardsAndResolvers: "always", resolve: {
-    data: ApplicationResolver
-  } },
-  { path: 'password/reset/:authKey', component: ApplicantResetPasswordComponent, resolve: {
-    data: ResetPasswordResolver
-  } }, 
+  {
+    path: '',
+    component: HomeComponent,
+    runGuardsAndResolvers: 'always',
+    resolve: {
+      data: HomeResolver
+    }
+  },
+  {
+    path: 'account',
+    component: AuthenticationComponent,
+    runGuardsAndResolvers: 'always',
+    resolve: {
+      data: HomeResolver
+    }
+  },
+  {
+    path: 'help',
+    component: HelpComponent,
+    runGuardsAndResolvers: 'always',
+    resolve: {
+      data: HomeResolver
+    }
+  },
+  {
+    path: ':scholarshipURL',
+    component: ScholarshipComponent,
+    runGuardsAndResolvers: 'always',
+    resolve: {
+      data: ScholarshipResolver
+    }
+  },
+  {
+    path: ':scholarshipURL/application',
+    component: ApplicationComponent,
+    runGuardsAndResolvers: 'always',
+    resolve: {
+      data: ApplicationResolver
+    }
+  },
+  {
+    path: 'password/reset/:authKey',
+    component: ApplicantResetPasswordComponent,
+    resolve: {
+      data: ResetPasswordResolver
+    }
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'})],
+  imports: [RouterModule.forRoot(appRoutes, { onSameUrlNavigation: 'reload' })],
   exports: [RouterModule],
-  providers: [
-    HomeResolver,
-    ScholarshipResolver,
-    ApplicationResolver,
-    ResetPasswordResolver
-  ]
+  providers: [HomeResolver, ScholarshipResolver, ApplicationResolver, ResetPasswordResolver]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

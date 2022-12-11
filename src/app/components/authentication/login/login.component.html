@@ -1,7 +1,23 @@
 <div class="login-frame">
-  <auto-form [configuration]="formConfiguration" (formSubmit)="submit($event)" [submitting]="submitting"></auto-form>
+  <auto-form
+    [configuration]="formConfiguration"
+    (formSubmit)="submit($event)"
+    [submitting]="submitting"
+  ></auto-form>
   <div>
-    <a href="#" id="forgotPassword" (click)="forgotPassword($event)">Forgot your password?</a>
-    <p>Don't have an account? <a (click)="setToSignIn($event)" href="">Create one.</a></p>
+    <a
+      href="#"
+      id="forgotPassword"
+      (click)="forgotPassword($event)"
+      >Forgot your password?</a
+    >
+    <p>
+      Don't have an account?
+      <a
+        (click)="setToSignIn($event)"
+        href=""
+        >Create one.</a
+      >
+    </p>
   </div>
 </div>

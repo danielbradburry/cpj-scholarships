@@ -8,7 +8,6 @@ import { Subject } from 'rxjs';
   styleUrls: ['./application-folder.component.scss']
 })
 export class ApplicationFolderComponent implements OnInit {
-
   uploadProgress: any;
   accepts: string;
   fileTypeRestriction: string;
@@ -21,35 +20,34 @@ export class ApplicationFolderComponent implements OnInit {
   @Output() continue: EventEmitter<any> = new EventEmitter();
   private unsubscribe: Subject<void> = new Subject();
 
-  constructor(
-    private confirmService: ConfirmService,
-  ) { }
+  constructor(private confirmService: ConfirmService) {}
 
   ngOnInit() {
-    switch(this.folder.fileTypeRestriction) {
-      case 'image-pdf' : 
+    switch (this.folder.fileTypeRestriction) {
+      case 'image-pdf':
         this.accepts = 'Images (JPG/PNG) & PDFs only';
         this.fileTypeRestriction = 'image/jpeg,image/png,application/pdf';
         break;
-      case 'images' : 
+      case 'images':
         this.accepts = 'Images only (JPG/PNG)';
         this.fileTypeRestriction = 'image/jpeg,image/png';
         break;
-      case 'pdf' : 
+      case 'pdf':
         this.accepts = 'PDFs only';
         this.fileTypeRestriction = 'application/pdf';
         break;
-      default : 
+      default:
         this.accepts = 'Any file type';
         this.fileTypeRestriction = '';
     }
   }
 
   uploadFile(upload: any) {
-    const limit = (this.folder.maxUploads - this.folder.applicationUploads.length) > upload.target.files.length ?
-      upload.target.files.length :
-      this.folder.maxUploads - this.folder.applicationUploads.length;
-    
+    const limit =
+      this.folder.maxUploads - this.folder.applicationUploads.length > upload.target.files.length
+        ? upload.target.files.length
+        : this.folder.maxUploads - this.folder.applicationUploads.length;
+
     for (let i = 0; i < limit; i++) {
       this.uploadedFile.emit(upload.target.files[i]);
     }

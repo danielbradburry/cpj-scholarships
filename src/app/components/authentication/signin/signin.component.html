@@ -1,4 +1,15 @@
 <div class="signin-frame">
-  <auto-form [configuration]="formConfiguration" (formSubmit)="submit($event)" [submitting]="submitting"></auto-form>
-  <p>Already have an account? <a (click)="setToLogIn($event)" href="">Log In.</a></p>
+  <auto-form
+    [configuration]="formConfiguration"
+    (formSubmit)="submit($event)"
+    [submitting]="submitting"
+  ></auto-form>
+  <p>
+    Already have an account?
+    <a
+      (click)="setToLogIn($event)"
+      href=""
+      >Log In.</a
+    >
+  </p>
 </div>

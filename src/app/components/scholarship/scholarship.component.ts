@@ -31,39 +31,32 @@ export class ScholarshipComponent implements OnInit {
     private constants: ConstantsService,
     private sanitized: DomSanitizer
   ) {}
-  
+
   ngOnInit() {
-    this.scholarshipService.currentApplicant
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe((data) => {
-        this.applicant = data;
-      });
+    this.scholarshipService.currentApplicant.pipe(takeUntil(this.unsubscribe)).subscribe((data) => {
+      this.applicant = data;
+    });
 
-    this.scholarshipService.currentApplication
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe((data) => {
-        this.application = data;
-      });
+    this.scholarshipService.currentApplication.pipe(takeUntil(this.unsubscribe)).subscribe((data) => {
+      this.application = data;
+    });
 
-    this.scholarshipService.currentProgram
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe((data) => {
-        this.program = data;
-      });
+    this.scholarshipService.currentProgram.pipe(takeUntil(this.unsubscribe)).subscribe((data) => {
+      this.program = data;
+    });
 
-    this.scholarshipService.currentScholarship
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe((data) => {
-        this.scholarship = data;
-      });
+    this.scholarshipService.currentScholarship.pipe(takeUntil(this.unsubscribe)).subscribe((data) => {
+      this.scholarship = data;
+    });
 
-    this.route.data
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe((response: any) => {
+    this.route.data.pipe(takeUntil(this.unsubscribe)).subscribe(
+      (response: any) => {
         if (response.data.program && response.data.scholarship) {
           this.scholarshipService.setProgram(response.data.program);
           this.scholarshipService.setScholarship(response.data.scholarship);
-          this.scholarship.requirements = this.scholarship.requirements ? this.sanitized.bypassSecurityTrustHtml(this.scholarship.requirements) : null;
+          this.scholarship.requirements = this.scholarship.requirements
+            ? this.sanitized.bypassSecurityTrustHtml(this.scholarship.requirements)
+            : null;
         } else {
           this.redirectToMainSite();
         }
@@ -78,7 +71,8 @@ export class ScholarshipComponent implements OnInit {
       },
       () => {
         this.redirectToMainSite();
-      });
+      }
+    );
   }
 
   register() {
@@ -87,23 +81,26 @@ export class ScholarshipComponent implements OnInit {
       if (this.application?.applicationID) {
         this.redirectToApplication();
       } else {
-        this.scholarshipService.createApplication(this.program.url, this.scholarship.url)
+        this.scholarshipService
+          .createApplication(this.program.url, this.scholarship.url)
           .pipe(takeUntil(this.unsubscribe))
-          .subscribe((response: any) => {
-            if (response.valid) {
-              this.redirectToApplication();
-            } else {
-              if (response.error) {
-                this.toastr.error(response.error, 'Error!');
-                this.submitting = false;
+          .subscribe(
+            (response: any) => {
+              if (response.valid) {
+                this.redirectToApplication();
+              } else {
+                if (response.error) {
+                  this.toastr.error(response.error, 'Error!');
+                  this.submitting = false;
+                }
               }
+            },
+            (error: HttpErrorResponse) => {
+              this.toastr.error(error.message, 'Error!');
+              this.submitting = false;
             }
-          },
-          (error: HttpErrorResponse) => {
-            this.toastr.error(error.message, 'Error!');
-            this.submitting = false;
-          });
-        }
+          );
+      }
     } else {
       window.sessionStorage.setItem(this.constants.intendedScholarshipKey, this.scholarship.url);
       this.redirectToAccount();
@@ -124,10 +121,10 @@ export class ScholarshipComponent implements OnInit {
 
   viewApplication() {
     const ngbModalOptions: NgbModalOptions = {
-      backdrop : 'static',
-      keyboard : false
-    },
-    modalRef = this.modalService.open(ReviewComponent, ngbModalOptions);
+        backdrop: 'static',
+        keyboard: false
+      },
+      modalRef = this.modalService.open(ReviewComponent, ngbModalOptions);
     modalRef.componentInstance.scholarshipURL = this.scholarship.url;
     modalRef.componentInstance.scholarshipProgramURL = this.program.url;
   }

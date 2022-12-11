@@ -2,11 +2,22 @@
   <textarea
     [required]="element.required"
     autocomplete="new-password"
-    formControlName="{{element.name}}"
+    formControlName="{{ element.name }}"
     class="form-control"
     [attr.maxwords]="element.maxWords"
     [value]="element.value"
-    (ngModelChange)="reportChange()"></textarea>
-  <div class="limit" *ngIf="element.maxWords && !overLimit">{{element.maxWords - words}} word(s) remaining</div>
-  <div class="overLimit" *ngIf="element.maxWords && overLimit">{{words - element.maxWords}} word(s) over limit</div>
+    (ngModelChange)="reportChange()"
+  ></textarea>
+  <div
+    class="limit"
+    *ngIf="element.maxWords && !overLimit"
+  >
+    {{ element.maxWords - words }} word(s) remaining
+  </div>
+  <div
+    class="overLimit"
+    *ngIf="element.maxWords && overLimit"
+  >
+    {{ words - element.maxWords }} word(s) over limit
+  </div>
 </div>

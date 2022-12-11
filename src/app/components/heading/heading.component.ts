@@ -13,7 +13,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./heading.component.scss']
 })
 export class ScholarshipHeadingComponent implements OnInit {
-
   @Input() program: any;
   @Input() active: number;
   user: any;
@@ -29,11 +28,9 @@ export class ScholarshipHeadingComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.scholarshipService.currentApplicant
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe((applicant) => {
-        this.applicant = applicant;
-      });
+    this.scholarshipService.currentApplicant.pipe(takeUntil(this.unsubscribe)).subscribe((applicant) => {
+      this.applicant = applicant;
+    });
   }
 
   logout(event) {
@@ -41,13 +38,14 @@ export class ScholarshipHeadingComponent implements OnInit {
 
     const token = window.localStorage.getItem(this.constants.storageKey);
     if (token) {
-      this.scholarshipService.logout({token})
-        .subscribe((response: any) => {
+      this.scholarshipService.logout({ token }).subscribe(
+        (response: any) => {
           this.uiLoginProcess();
         },
         (error: HttpErrorResponse) => {
           this.toastr.error(error.message, 'Error!');
-        });
+        }
+      );
     } else {
       this.uiLoginProcess();
     }

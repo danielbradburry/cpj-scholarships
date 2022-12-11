@@ -31,37 +31,44 @@ export class LoginComponent implements OnInit {
     private toastr: ToastrService,
     private scholarshipService: ScholarshipService,
     private constants: ConstantsService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.formConfiguration = {
       formElements: {
-        rows: [{
-          elements: [{
-            class: 'form-group col-sm-12',
-            label: 'Email',
-            name: 'email',
-            type: 'text',
-            required: true,
-            value: '',
-            autoComplete: 'email',
-            requiredErrorLabel: 'Email required'
-          }]
-        }, {
-          elements: [{
-            class: 'form-group col-sm-12',
-            label: 'Password',
-            name: 'password',
-            type: 'password-any',
-            required: true,
-            value: '',
-            autoComplete: 'off',
-            requiredErrorLabel: 'Password required'
-          }]
-        }]
+        rows: [
+          {
+            elements: [
+              {
+                class: 'form-group col-sm-12',
+                label: 'Email',
+                name: 'email',
+                type: 'text',
+                required: true,
+                value: '',
+                autoComplete: 'email',
+                requiredErrorLabel: 'Email required'
+              }
+            ]
+          },
+          {
+            elements: [
+              {
+                class: 'form-group col-sm-12',
+                label: 'Password',
+                name: 'password',
+                type: 'password-any',
+                required: true,
+                value: '',
+                autoComplete: 'off',
+                requiredErrorLabel: 'Password required'
+              }
+            ]
+          }
+        ]
       },
       submitCTA: 'Sign In'
-    }
+    };
   }
 
   clear() {
@@ -70,35 +77,38 @@ export class LoginComponent implements OnInit {
 
   submit(form) {
     this.submitting = true;
-    this.scholarshipService.login(form.value)
+    this.scholarshipService
+      .login(form.value)
       .pipe(takeUntil(this.unsubscribe))
-      .subscribe((response: any) => {
-        if (response.token) {
-          window.localStorage.setItem(this.constants.storageKey, response.token);
-          this.success = true;
-          const intendedScholarship = window.sessionStorage.getItem(this.constants.intendedScholarshipKey);
-          if (intendedScholarship) {
-            this.router.navigate([`/${intendedScholarship}/application`], { queryParamsHandling: 'preserve' }).then(() => {
+      .subscribe(
+        (response: any) => {
+          if (response.token) {
+            window.localStorage.setItem(this.constants.storageKey, response.token);
+            this.success = true;
+            const intendedScholarship = window.sessionStorage.getItem(this.constants.intendedScholarshipKey);
+            if (intendedScholarship) {
+              this.router.navigate([`/${intendedScholarship}/application`], { queryParamsHandling: 'preserve' }).then(() => {
+                this.scholarshipService.setApplicant(response.applicant);
+              });
+              window.sessionStorage.removeItem(this.constants.intendedScholarshipKey);
+            } else {
+              this.requestLoginReload.emit(true);
               this.scholarshipService.setApplicant(response.applicant);
-            });
-            window.sessionStorage.removeItem(this.constants.intendedScholarshipKey);
+              this.submitting = false;
+            }
           } else {
-            this.requestLoginReload.emit(true);
-            this.scholarshipService.setApplicant(response.applicant);
-            this.submitting = false;
+            this.applicant = false;
+            if (response.error) {
+              this.error = response.error;
+              this.submitting = false;
+              this.toastr.error(response.error, 'Error!');
+            }
           }
-        } else {
-          this.applicant = false;
-          if (response.error) {
-            this.error = response.error;
-            this.submitting = false;
-            this.toastr.error(response.error, 'Error!');
-          }
+        },
+        (error: HttpErrorResponse) => {
+          this.error = error.message;
         }
-      },
-      (error: HttpErrorResponse) => {
-        this.error = error.message;
-      });
+      );
   }
 
   setToSignIn(event) {

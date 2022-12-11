@@ -6,13 +6,11 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./upload-progress.component.scss']
 })
 export class UploadProgressComponent implements OnInit {
-
   @Input() fileUploads: any;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   convertToNumber(value) {
     return parseInt(value);

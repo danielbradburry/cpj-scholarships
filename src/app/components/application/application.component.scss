@@ -1,4 +1,4 @@
-@import "../../../sass/vars";
+@import '../../../sass/vars';
 
 h3 {
   font-size: 20px;
@@ -35,7 +35,7 @@ h3 {
   .visual-progress-background {
     position: relative;
     &:before {
-      content: "";
+      content: '';
       border-top: 2px solid $grayLight;
       display: block;
       width: 100%;
@@ -52,7 +52,7 @@ h3 {
     position: relative;
     transition: all 0.5s ease 0s;
     &:before {
-      content: "";
+      content: '';
       border-top: 2px solid $primaryBlueLight;
       display: block;
       width: 100%;
@@ -72,7 +72,8 @@ h3 {
       align-items: center;
       flex-direction: column;
       flex: 1;
-      &:first-child, &:last-child {
+      &:first-child,
+      &:last-child {
         flex: 0 0;
       }
     }

@@ -4,19 +4,16 @@ import { ConfirmComponent } from './confirm.component';
 
 @Injectable()
 export class ConfirmService {
-
-  constructor(
-    private modalService: NgbModal
-  ) { }
+  constructor(private modalService: NgbModal) {}
 
   public confirm(statement, action, fallback?) {
     const ngbModalOptions: NgbModalOptions = {
-      backdrop : 'static',
-      keyboard : false,
-      centered: true
-    },
-    modalRef = this.modalService.open(ConfirmComponent, ngbModalOptions);
-    
+        backdrop: 'static',
+        keyboard: false,
+        centered: true
+      },
+      modalRef = this.modalService.open(ConfirmComponent, ngbModalOptions);
+
     modalRef.componentInstance.statement = statement;
     modalRef.componentInstance.action = action;
     modalRef.componentInstance.fallback = fallback;

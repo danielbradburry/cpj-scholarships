@@ -1,8 +1,9 @@
-<scholarship-heading [program]="program" [active]="1"></scholarship-heading>
+<scholarship-heading
+  [program]="program"
+  [active]="1"
+></scholarship-heading>
 
-<div
-  *ngIf="!applicant"
->
+<div *ngIf="!applicant">
   <h3>Welcome!</h3>
   <p>In order to apply to scholarships through this online platform, applicants are required to first create an online account.</p>
   <app-login
@@ -18,14 +19,14 @@
 <div *ngIf="applicant">
   <div class="tabs">
     <div
-      *ngFor="let tab of tabs" class="tab"
+      *ngFor="let tab of tabs"
+      class="tab"
       (click)="changeComponent(tab)"
-      [class.active]="tab.active">
-      {{tab.label}}
+      [class.active]="tab.active"
+    >
+      {{ tab.label }}
     </div>
   </div>
-  <h3>Hello {{applicant.fullName}}!</h3>
+  <h3>Hello {{ applicant.fullName }}!</h3>
   <div view-ref></div>
 </div>
-
-

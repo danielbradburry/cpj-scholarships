@@ -8,15 +8,13 @@ export class ScholarshipService {
   private applicant = new BehaviorSubject<any>(null);
   private application = new BehaviorSubject<any>(null);
   private program = new BehaviorSubject<any>(null);
-  private scholarship = new BehaviorSubject<any>(null)
+  private scholarship = new BehaviorSubject<any>(null);
   currentApplicant = this.applicant.asObservable();
   currentApplication = this.application.asObservable();
   currentProgram = this.program.asObservable();
   currentScholarship = this.scholarship.asObservable();
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
   setApplicant(data: any) {
     this.applicant.next(data);
@@ -47,11 +45,11 @@ export class ScholarshipService {
   }
 
   changePassword(form) {
-    return this.http.post(`${environment.apiDomain}scholarship-programs/applicants/password`, form); 
+    return this.http.post(`${environment.apiDomain}scholarship-programs/applicants/password`, form);
   }
 
   changePasswordByEmail(form) {
-    return this.http.post(`${environment.apiDomain}scholarship-programs/password/reset/by-email`, form); 
+    return this.http.post(`${environment.apiDomain}scholarship-programs/password/reset/by-email`, form);
   }
 
   login(form) {
@@ -83,15 +81,25 @@ export class ScholarshipService {
   }
 
   updateFormResponse(scholarshipProgramURL, scholarshipURL, applicationFormID, form) {
-    return this.http.post(`${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/applications/application-forms/${applicationFormID}`, form);
+    return this.http.post(
+      `${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/applications/application-forms/${applicationFormID}`,
+      form
+    );
   }
 
   uploadFile(scholarshipProgramURL, scholarshipURL, documentFolderID, file) {
-    return this.http.post(`${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/applications/uploads/${documentFolderID}`, file, { reportProgress: true, observe: 'events'});
+    return this.http.post(
+      `${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/applications/uploads/${documentFolderID}`,
+      file,
+      { reportProgress: true, observe: 'events' }
+    );
   }
 
   removeFile(scholarshipProgramURL, scholarshipURL, documentFolderID, file) {
-    return this.http.post(`${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/applications/uploads/${documentFolderID}/remove`, file);
+    return this.http.post(
+      `${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/applications/uploads/${documentFolderID}/remove`,
+      file
+    );
   }
 
   submitApplication(scholarshipProgramURL, scholarshipURL) {

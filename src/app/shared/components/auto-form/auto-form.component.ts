@@ -13,22 +13,14 @@ import { delay } from 'lodash';
   styleUrls: ['./auto-form.component.scss']
 })
 export class AutoFormComponent implements OnInit {
-
   formGroup: UntypedFormGroup;
   formElements: any[];
   checkboxHandlers: any[] = [];
   selectHandlers: any[] = [];
-  private intTypes: string[] = [
-    'number',
-    'phone'
-  ];
+  private intTypes: string[] = ['number', 'phone'];
   private unsubscribe: Subject<void> = new Subject();
 
-  constructor(
-    private formsService: FormsService,
-    private ngbDateParserFormatter: NgbDateParserFormatter,
-    private confirmService: ConfirmService
-  ) { }
+  constructor(private formsService: FormsService, private ngbDateParserFormatter: NgbDateParserFormatter, private confirmService: ConfirmService) {}
 
   @Input() submitting: boolean;
   @Input() configuration: any;
@@ -39,7 +31,7 @@ export class AutoFormComponent implements OnInit {
   @Output() formRemove: EventEmitter<any> = new EventEmitter();
 
   ngOnInit() {
-    this.formElements = this.iterateElements(this.configuration.formElements)
+    this.formElements = this.iterateElements(this.configuration.formElements);
     this.formGroup = this.formsService.createFormGroup(this.formElements);
     this.bindCheckboxHandlers();
     this.bindSelectHandlers();
@@ -53,7 +45,8 @@ export class AutoFormComponent implements OnInit {
         for (let j = 0; j < obj.rows[i].elements.length; j++) {
           array.push(obj.rows[i].elements[j]);
           if (this.intTypes.indexOf(obj.rows[i].elements[j].type) !== -1) {
-            obj.rows[i].elements[j].value = (!obj.rows[i].elements[j].value || obj.rows[i].elements[j].value.trim() === '') ? '' : parseInt(obj.rows[i].elements[j].value);
+            obj.rows[i].elements[j].value =
+              !obj.rows[i].elements[j].value || obj.rows[i].elements[j].value.trim() === '' ? '' : parseInt(obj.rows[i].elements[j].value);
           }
           if (obj.rows[i].elements[j].type === 'checkbox') {
             this.checkboxHandlers.push(obj.rows[i].elements[j]);
@@ -76,21 +69,17 @@ export class AutoFormComponent implements OnInit {
         handlerElement = this.formGroup.get(handler.name);
 
       if (handler.hide && handler.hide.length) {
-        handlerElement.valueChanges
-          .pipe(takeUntil(this.unsubscribe))
-          .subscribe(val => {
-            this.checkHide(val, handler.hide);
-          });
+        handlerElement.valueChanges.pipe(takeUntil(this.unsubscribe)).subscribe((val) => {
+          this.checkHide(val, handler.hide);
+        });
         if (handlerElement.value) {
           this.checkHide(true, handler.hide);
         }
       }
       if (handler.disable && handler.disable.length) {
-        handlerElement.valueChanges
-          .pipe(takeUntil(this.unsubscribe))
-          .subscribe(val => {
-            this.checkDisable(val, handler.disable);
-          });
+        handlerElement.valueChanges.pipe(takeUntil(this.unsubscribe)).subscribe((val) => {
+          this.checkDisable(val, handler.disable);
+        });
         if (handlerElement.value) {
           this.checkDisable(true, handler.disable);
         }
@@ -104,21 +93,17 @@ export class AutoFormComponent implements OnInit {
         handlerElement = this.formGroup.get(handler.name);
 
       if (handler.hide && handler.hide.if && handler.hide.if.length) {
-        handlerElement.valueChanges
-          .pipe(takeUntil(this.unsubscribe))
-          .subscribe(val => {
-            this.checkHide((handler.hide.if.indexOf(val) !== -1), handler.hide.elements);
-          });
+        handlerElement.valueChanges.pipe(takeUntil(this.unsubscribe)).subscribe((val) => {
+          this.checkHide(handler.hide.if.indexOf(val) !== -1, handler.hide.elements);
+        });
         if (handler.hide.if.indexOf(handlerElement.value) !== -1) {
           this.checkHide(true, handler.hide.elements);
         }
       }
       if (handler.disable && handler.disable.if && handler.disable.if.length) {
-        handlerElement.valueChanges
-          .pipe(takeUntil(this.unsubscribe))
-          .subscribe(val => {
-            this.checkDisable((handler.disable.if.indexOf(val) !== -1), handler.disable.elements);
-          });
+        handlerElement.valueChanges.pipe(takeUntil(this.unsubscribe)).subscribe((val) => {
+          this.checkDisable(handler.disable.if.indexOf(val) !== -1, handler.disable.elements);
+        });
         if (handler.disable.indexOf(handlerElement.value) !== -1) {
           this.checkDisable(true, handler.disable.elements);
         }
@@ -159,12 +144,7 @@ export class AutoFormComponent implements OnInit {
   }
 
   isInput(type) {
-    return [
-      'text',
-      'url-fragment',
-      'category-label',
-      'zipcode'
-    ].indexOf(type) !== -1;
+    return ['text', 'url-fragment', 'category-label', 'zipcode'].indexOf(type) !== -1;
   }
 
   submit() {
@@ -183,9 +163,13 @@ export class AutoFormComponent implements OnInit {
   }
 
   remove(event, dialog) {
-    this.confirmService.confirm(dialog, () => {
-      this.formRemove.emit(event);
-    }, null);
+    this.confirmService.confirm(
+      dialog,
+      () => {
+        this.formRemove.emit(event);
+      },
+      null
+    );
   }
 
   notify(element) {
@@ -207,9 +191,7 @@ export class AutoFormComponent implements OnInit {
 
   validateDateRanges(element) {
     if (element && element.fileUploadRange) {
-      let minimumElement,
-        maximumElement,
-        maximumControl;
+      let minimumElement, maximumElement, maximumControl;
 
       if (element.fileUploadRange.minimum) {
         minimumElement = this.formGroup.get(element.fileUploadRange.minimum);
@@ -232,16 +214,11 @@ export class AutoFormComponent implements OnInit {
         }
       }
 
-      maximumControlErrors = (maximumControlErrors && Object.keys(maximumControlErrors).length === 0) ? null : maximumControlErrors;
+      maximumControlErrors = maximumControlErrors && Object.keys(maximumControlErrors).length === 0 ? null : maximumControlErrors;
       maximumControl.setErrors(maximumControlErrors);
     }
     if (element && element.dateElements) {
-      let startDateElement,
-        endDateElement,
-        startDateControl,
-        endDateControl,
-        startTimeElement,
-        endTimeElement;
+      let startDateElement, endDateElement, startDateControl, endDateControl, startTimeElement, endTimeElement;
 
       if (element.dateElements.startDate) {
         startDateElement = this.formGroup.get(element.dateElements.startDate);
@@ -259,12 +236,12 @@ export class AutoFormComponent implements OnInit {
       }
 
       if (startDateElement !== null && endDateElement !== null) {
-        let startTimestamp = startTimeElement ? 
-            this.convertDateAndTimeToTimeStamp(this.ngbDateParserFormatter.format(startDateElement.value), startTimeElement.value) :
-            this.convertValueToTimeStamp(startDateElement.value),
-          endTimestamp = endTimeElement ? 
-            this.convertDateAndTimeToTimeStamp(this.ngbDateParserFormatter.format(endDateElement.value), endTimeElement.value) :
-            this.convertValueToTimeStamp(endDateElement.value),
+        let startTimestamp = startTimeElement
+            ? this.convertDateAndTimeToTimeStamp(this.ngbDateParserFormatter.format(startDateElement.value), startTimeElement.value)
+            : this.convertValueToTimeStamp(startDateElement.value),
+          endTimestamp = endTimeElement
+            ? this.convertDateAndTimeToTimeStamp(this.ngbDateParserFormatter.format(endDateElement.value), endTimeElement.value)
+            : this.convertValueToTimeStamp(endDateElement.value),
           endControlErrors = endDateControl.errors || {};
 
         if (isNaN(startTimestamp) || isNaN(endTimestamp)) {
@@ -279,15 +256,17 @@ export class AutoFormComponent implements OnInit {
 
         if (element.dateElements.conflictsWith && !endControlErrors.lessThan) {
           let overlapConflict = element.dateElements.conflictsWith.some((timeframe) => {
-            let compareStart = this.convertDateAndTimeToTimeStamp(timeframe.startDate, timeframe.startTime),
-              compareEnd = this.convertDateAndTimeToTimeStamp(timeframe.endDate, timeframe.endTime);
+              let compareStart = this.convertDateAndTimeToTimeStamp(timeframe.startDate, timeframe.startTime),
+                compareEnd = this.convertDateAndTimeToTimeStamp(timeframe.endDate, timeframe.endTime);
 
-              return (startTimestamp > compareStart && startTimestamp < compareEnd) || 
-              (endTimestamp > compareStart && endTimestamp < compareEnd) ||
-              (compareStart > startTimestamp && compareStart < endTimestamp) || 
-              (compareEnd > startTimestamp && compareEnd < endTimestamp);
-          }),
-          startControlErrors = startDateControl.errors || {};
+              return (
+                (startTimestamp > compareStart && startTimestamp < compareEnd) ||
+                (endTimestamp > compareStart && endTimestamp < compareEnd) ||
+                (compareStart > startTimestamp && compareStart < endTimestamp) ||
+                (compareEnd > startTimestamp && compareEnd < endTimestamp)
+              );
+            }),
+            startControlErrors = startDateControl.errors || {};
 
           if (overlapConflict) {
             startControlErrors.overlap = true;
@@ -296,21 +275,18 @@ export class AutoFormComponent implements OnInit {
             delete startControlErrors.overlap;
           }
 
-          startControlErrors = (startControlErrors && Object.keys(startControlErrors).length === 0) ? null : startControlErrors;
+          startControlErrors = startControlErrors && Object.keys(startControlErrors).length === 0 ? null : startControlErrors;
           startDateControl.setErrors(startControlErrors);
         }
-        
-        endControlErrors = (endControlErrors && Object.keys(endControlErrors).length === 0) ? null : endControlErrors;
+
+        endControlErrors = endControlErrors && Object.keys(endControlErrors).length === 0 ? null : endControlErrors;
         endDateControl.setErrors(endControlErrors);
       }
     }
   }
 
   validatePasswordsMatch(element) {
-    let password,
-      confirm,
-      matchRequired,
-      errors;
+    let password, confirm, matchRequired, errors;
 
     if (element.mustMatch) {
       password = this.formGroup.get(element.name);
@@ -324,7 +300,7 @@ export class AutoFormComponent implements OnInit {
       } else {
         delete errors.mustMatch;
       }
-      errors = (errors && Object.keys(errors).length === 0) ? null : errors;
+      errors = errors && Object.keys(errors).length === 0 ? null : errors;
 
       this.formGroup.controls[element.name].setErrors(errors);
     }

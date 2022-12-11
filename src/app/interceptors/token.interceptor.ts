@@ -5,15 +5,11 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-
-  constructor(
-    public constants: ConstantsService
-  ) {}
+  constructor(public constants: ConstantsService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     request = request.clone({
-      headers: new HttpHeaders()
-        .set('X-Authorization', 'Bearer ' + window.localStorage.getItem(this.constants.storageKey))
+      headers: new HttpHeaders().set('X-Authorization', 'Bearer ' + window.localStorage.getItem(this.constants.storageKey))
     });
 
     return next.handle(request);

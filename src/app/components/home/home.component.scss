@@ -1,4 +1,4 @@
-@import "../../../sass/vars";
+@import '../../../sass/vars';
 
 .scholarships {
   display: flex;
@@ -51,11 +51,12 @@
           border-radius: 4px;
         }
       }
-      
+
       &:last-child {
         align-items: flex-end;
       }
-      .amount, .status {
+      .amount,
+      .status {
         font-size: 12px;
       }
     }

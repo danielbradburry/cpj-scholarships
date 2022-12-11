@@ -1,30 +1,44 @@
-<scholarship-heading [program]="program" [active]="0"></scholarship-heading>
+<scholarship-heading
+  [program]="program"
+  [active]="0"
+></scholarship-heading>
 
 <div class="scholarship">
   <h3>
-    {{scholarship.scholarshipName}}
+    {{ scholarship.scholarshipName }}
     <button
       *ngIf="scholarship.isOpen && !application?.complete"
       class="btn btn-confirm formSubmit"
-      (click)="register()">
-        <span *ngIf="application?.applicationID">Continue</span>
-        <span *ngIf="!application?.applicationID">Apply</span>
-        <img *ngIf="submitting" class="loading" src="/assets/images/loading-confirm.gif" />
-        <i *ngIf="!submitting" class="fas fa-arrow-circle-right"></i>
+      (click)="register()"
+    >
+      <span *ngIf="application?.applicationID">Continue</span>
+      <span *ngIf="!application?.applicationID">Apply</span>
+      <img
+        *ngIf="submitting"
+        class="loading"
+        src="/assets/images/loading-confirm.gif"
+      />
+      <i
+        *ngIf="!submitting"
+        class="fas fa-arrow-circle-right"
+      ></i>
     </button>
     <button
       *ngIf="application?.complete"
       class="btn btn-primary formSubmit"
-      (click)="viewApplication()">
-        <span>Review Application</span>
-        <i class="fas fa-arrow-circle-right"></i>
+      (click)="viewApplication()"
+    >
+      <span>Review Application</span>
+      <i class="fas fa-arrow-circle-right"></i>
     </button>
   </h3>
-  <label>Award:
-    <p>{{scholarship.amount}}</p>
+  <label
+    >Award:
+    <p>{{ scholarship.amount }}</p>
   </label>
-  <label>Deadline:
-		<p [innerText]="scholarship.isOpen ? scholarship.applicationEndDate : 'Ended'"></p>
+  <label
+    >Deadline:
+    <p [innerText]="scholarship.isOpen ? scholarship.applicationEndDate : 'Ended'"></p>
   </label>
   <p
     *ngIf="scholarship.requirements"
@@ -35,9 +49,17 @@
 <button
   *ngIf="scholarship.isOpen && !application?.complete"
   class="btn btn-confirm formSubmit mb-3"
-  (click)="register()">
-    <span *ngIf="application?.applicationID">Continue</span>
-    <span *ngIf="!application?.applicationID">Apply</span>
-    <img *ngIf="submitting" class="loading" src="/assets/images/loading-confirm.gif" />
-    <i *ngIf="!submitting" class="fas fa-arrow-circle-right"></i>
+  (click)="register()"
+>
+  <span *ngIf="application?.applicationID">Continue</span>
+  <span *ngIf="!application?.applicationID">Apply</span>
+  <img
+    *ngIf="submitting"
+    class="loading"
+    src="/assets/images/loading-confirm.gif"
+  />
+  <i
+    *ngIf="!submitting"
+    class="fas fa-arrow-circle-right"
+  ></i>
 </button>

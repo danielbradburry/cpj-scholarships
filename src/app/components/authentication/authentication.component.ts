@@ -23,41 +23,40 @@ export class AuthenticationComponent implements OnInit, AfterViewInit {
   scholarshipKeyQueryParam: string;
   private unsubscribe: Subject<void> = new Subject();
   @ViewChild(ViewRefDirective) vref: any;
-  tabs: any[] = [{
-    label: 'My Scholarship Applications',
-    component: MyScholarshipsComponent
-  }, {
-    label: 'Update My Information',
-    component: UpdateApplicantComponent
-  }, {
-    label: 'Change Password',
-    component: ChangePasswordComponent
-  }];
+  tabs: any[] = [
+    {
+      label: 'My Scholarship Applications',
+      component: MyScholarshipsComponent
+    },
+    {
+      label: 'Update My Information',
+      component: UpdateApplicantComponent
+    },
+    {
+      label: 'Change Password',
+      component: ChangePasswordComponent
+    }
+  ];
 
   constructor(
     private route: ActivatedRoute,
     private scholarshipService: ScholarshipService,
     private componentFactoryResolver: ComponentFactoryResolver
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.state = 'login';
 
-    this.scholarshipService.currentProgram
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe((data) => {
-        this.program = data;
-      });
+    this.scholarshipService.currentProgram.pipe(takeUntil(this.unsubscribe)).subscribe((data) => {
+      this.program = data;
+    });
 
-    this.scholarshipService.currentApplicant
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe((data) => {
-        this.applicant = data;
-      });
+    this.scholarshipService.currentApplicant.pipe(takeUntil(this.unsubscribe)).subscribe((data) => {
+      this.applicant = data;
+    });
 
-    this.route.data
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe((response: any) => {
+    this.route.data.pipe(takeUntil(this.unsubscribe)).subscribe(
+      (response: any) => {
         if (response.data.program) {
           this.scholarshipService.setProgram(response.data.program);
         } else {
@@ -69,29 +68,26 @@ export class AuthenticationComponent implements OnInit, AfterViewInit {
       },
       () => {
         this.redirectToMainSite();
-      });
+      }
+    );
 
-    this.route.queryParams
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe(params => {
-        this.scholarshipKeyQueryParam = params.scholarshipKey;
-      });
+    this.route.queryParams.pipe(takeUntil(this.unsubscribe)).subscribe((params) => {
+      this.scholarshipKeyQueryParam = params.scholarshipKey;
+    });
   }
 
   ngAfterViewInit() {
-    this.scholarshipService.currentApplicant
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe((applicant) => {
-        this.applicant = applicant;
-        if (applicant && !this.currentComponent) {
-          setTimeout(() => {
-            this.changeComponent(this.tabs[0]);
-          }, 0)
-        }
-        if (!applicant) {
-          this.currentComponent = null;
-        }
-      });
+    this.scholarshipService.currentApplicant.pipe(takeUntil(this.unsubscribe)).subscribe((applicant) => {
+      this.applicant = applicant;
+      if (applicant && !this.currentComponent) {
+        setTimeout(() => {
+          this.changeComponent(this.tabs[0]);
+        }, 0);
+      }
+      if (!applicant) {
+        this.currentComponent = null;
+      }
+    });
   }
 
   changeComponent(tab) {
@@ -107,11 +103,9 @@ export class AuthenticationComponent implements OnInit, AfterViewInit {
     componentRef.instance.scholarships = this.program.scholarships.filter((scholarship) => {
       return scholarship.status !== 'not-started';
     });
-    componentRef.instance.submitted
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe(() => {
-        this.changeComponent(this.tabs[0]);
-      });
+    componentRef.instance.submitted.pipe(takeUntil(this.unsubscribe)).subscribe(() => {
+      this.changeComponent(this.tabs[0]);
+    });
   }
 
   changeToLogIn() {
@@ -125,20 +119,23 @@ export class AuthenticationComponent implements OnInit, AfterViewInit {
   requestLoginReload() {
     this.reloading = true;
     const scholarshipProgramKey = this.getScholarshipKey();
-      
-    this.scholarshipService.getScholarshipProgramForView(scholarshipProgramKey)
+
+    this.scholarshipService
+      .getScholarshipProgramForView(scholarshipProgramKey)
       .pipe(takeUntil(this.unsubscribe))
-      .subscribe((response: any) => {
-        setTimeout(() => {
-          if (response.program) {
-            this.scholarshipService.setProgram(response.program);
-          } 
-          if (response.applicant) {
-            this.scholarshipService.setApplicant(response.applicant);
-          }
-        }, 0);
-      }, () => {
-      })
+      .subscribe(
+        (response: any) => {
+          setTimeout(() => {
+            if (response.program) {
+              this.scholarshipService.setProgram(response.program);
+            }
+            if (response.applicant) {
+              this.scholarshipService.setApplicant(response.applicant);
+            }
+          }, 0);
+        },
+        () => {}
+      )
       .add(() => {
         this.reloading = false;
       });

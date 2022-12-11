@@ -1,43 +1,73 @@
 <div class="heading">
-  <img class="logo" src="{{program?.logo | encodeUri}}" />
+  <img
+    class="logo"
+    src="{{ program?.logo | encodeUri }}"
+  />
   <div class="title mt-3">
-    <h4>{{program?.organizationName}} {{program?.chapterName}}</h4>
-    <h3>{{program?.scholarshipProgramName}}</h3>
+    <h4>{{ program?.organizationName }} {{ program?.chapterName }}</h4>
+    <h3>{{ program?.scholarshipProgramName }}</h3>
   </div>
 </div>
 <nav class="navbar navbar-expand-lg">
   <div id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item" [class.active]="active === 0">
+      <li
+        class="nav-item"
+        [class.active]="active === 0"
+      >
         <a
           class="nav-link"
           routerLink="/"
-          queryParamsHandling="preserve">Home</a>
+          queryParamsHandling="preserve"
+          >Home</a
+        >
       </li>
-      <li *ngIf="applicant" class="nav-item" [class.active]="active === 1">
+      <li
+        *ngIf="applicant"
+        class="nav-item"
+        [class.active]="active === 1"
+      >
         <a
           class="nav-link"
           routerLink="/account"
-          queryParamsHandling="preserve">My Account</a>
+          queryParamsHandling="preserve"
+          >My Account</a
+        >
       </li>
-      <li class="nav-item" [class.active]="active === 2">
+      <li
+        class="nav-item"
+        [class.active]="active === 2"
+      >
         <a
           class="nav-link"
           routerLink="/help"
-          queryParamsHandling="preserve">Help</a>
+          queryParamsHandling="preserve"
+          >Help</a
+        >
       </li>
-      <li *ngIf="!applicant" class="nav-item" [class.active]="active === 1">
+      <li
+        *ngIf="!applicant"
+        class="nav-item"
+        [class.active]="active === 1"
+      >
         <a
           class="nav-link"
           routerLink="/account"
-          queryParamsHandling="preserve">Sign In</a>
+          queryParamsHandling="preserve"
+          >Sign In</a
+        >
       </li>
-      <li *ngIf="applicant" class="nav-item">
+      <li
+        *ngIf="applicant"
+        class="nav-item"
+      >
         <a
           class="nav-link"
           href="#"
           (click)="logout($event)"
-          queryParamsHandling="preserve">Logout</a>
+          queryParamsHandling="preserve"
+          >Logout</a
+        >
       </li>
     </ul>
   </div>

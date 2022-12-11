@@ -6,11 +6,7 @@ import * as moment from 'moment';
 
 @Injectable()
 export class FormsService {
-
-  constructor(
-    private constants: ConstantsService,
-    private ngbDateParserFormatter: NgbDateParserFormatter
-  ) { }
+  constructor(private constants: ConstantsService, private ngbDateParserFormatter: NgbDateParserFormatter) {}
 
   public createFormGroup(source) {
     var self = this,
@@ -25,49 +21,49 @@ export class FormsService {
     function createControl(source) {
       var construct,
         types = {
-          'heading': function () {
+          heading: function () {
             return [];
           },
-          'paragraph': function () {
+          paragraph: function () {
             return [];
           },
-          'hidden': function () {
+          hidden: function () {
             return [];
           },
-          'text': function () {
+          text: function () {
             return [];
           },
-          'number': function () {
+          number: function () {
             return [];
           },
-          'textarea': function () {
+          textarea: function () {
             return [];
           },
-          'select': function () {
+          select: function () {
             return [];
           },
-          'checkbox': function () {
+          checkbox: function () {
             return [];
           },
-          'date': function() {
+          date: function () {
             return [];
           },
-          'email': function () {
+          email: function () {
             return [Validators.pattern(self.constants.emailRegExp)];
           },
-          'password': function () {
+          password: function () {
             return [Validators.pattern(self.constants.passwordRegExp)];
           },
           'password-any': function () {
             return [];
           },
-          'website': function () {
+          website: function () {
             return [Validators.pattern(self.constants.httpRegExp)];
           },
-          'phone': function () {
+          phone: function () {
             return [Validators.pattern(self.constants.phoneRegExp)];
           },
-          'ssn': function () {
+          ssn: function () {
             return [Validators.pattern(self.constants.ssnRegExp)];
           }
         };
@@ -78,11 +74,11 @@ export class FormsService {
       }
 
       if (source.type === 'date') {
-        source.value = moment(source.value, "YYYY-MM-DD").format('MM-DD-YYYY');
+        source.value = moment(source.value, 'YYYY-MM-DD').format('MM-DD-YYYY');
         source.value = self.ngbDateParserFormatter.parse(source.value);
       }
 
-      return new UntypedFormControl(source.value, { 
+      return new UntypedFormControl(source.value, {
         validators: construct
       });
     }
@@ -93,7 +89,7 @@ export class FormsService {
       if (typeof formGroup.value[property] === 'object' && formGroup.value[property]) {
         let keys = Object.keys(property);
 
-        if (keys.indexOf('month') !== 1 && keys.indexOf('day') !== 1 && keys.indexOf('year') !== 1 ) {
+        if (keys.indexOf('month') !== 1 && keys.indexOf('day') !== 1 && keys.indexOf('year') !== 1) {
           formGroup.value[property] = this.convertValueToDate(formGroup.value[property]);
         }
       }
@@ -109,6 +105,6 @@ export class FormsService {
 
   private convertValueToDate(value) {
     value = this.ngbDateParserFormatter.format(value);
-    return moment(value, "MM-DD-YYYY").format('YYYY-MM-DD');
+    return moment(value, 'MM-DD-YYYY').format('YYYY-MM-DD');
   }
 }

@@ -9,25 +9,50 @@
       <button
         class="btn btn-secondary"
         (click)="goToStep(i)"
-      ><i class="fas fa-pencil-alt"></i></button>
-      {{step.name}}
+      >
+        <i class="fas fa-pencil-alt"></i>
+      </button>
+      {{ step.name }}
     </h4>
-    <div class="step-content" *ngIf="step.form && !step.hideFromReview">
-      <div class="question" *ngFor="let question of step.form.applicationFormQuestions">
-        <label>{{question.label}}:
-          <span>{{step.formGroup.value[question.name]}}</span>
+    <div
+      class="step-content"
+      *ngIf="step.form && !step.hideFromReview"
+    >
+      <div
+        class="question"
+        *ngFor="let question of step.form.applicationFormQuestions"
+      >
+        <label
+          >{{ question.label }}:
+          <span>{{ step.formGroup.value[question.name] }}</span>
         </label>
       </div>
     </div>
-    <div class="step-content" *ngIf="step.folder && !step.hideFromReview">
-      <p *ngIf="!step.folder.applicationUploads?.length" class="no-border">
+    <div
+      class="step-content"
+      *ngIf="step.folder && !step.hideFromReview"
+    >
+      <p
+        *ngIf="!step.folder.applicationUploads?.length"
+        class="no-border"
+      >
         No files uploaded.
       </p>
-      <div class="files" *ngIf="step.folder.applicationUploads?.length">
+      <div
+        class="files"
+        *ngIf="step.folder.applicationUploads?.length"
+      >
         <p>Files uploaded:</p>
-        <div class="file" *ngFor="let upload of step.folder.applicationUploads">
-          <a href="{{upload.URL}}" target="_blank">{{upload.name}}</a>
-          <div class="size">- {{upload.size}}</div>
+        <div
+          class="file"
+          *ngFor="let upload of step.folder.applicationUploads"
+        >
+          <a
+            href="{{ upload.URL }}"
+            target="_blank"
+            >{{ upload.name }}</a
+          >
+          <div class="size">- {{ upload.size }}</div>
         </div>
       </div>
     </div>
@@ -39,8 +64,15 @@
       [disabled]="submitting"
     >
       <span>Submit Application</span>
-      <img *ngIf="submitting" class="loading" src="/assets/images/loading-confirm.gif" />
-      <i *ngIf="!submitting" class="fas fa-arrow-circle-right"></i>
+      <img
+        *ngIf="submitting"
+        class="loading"
+        src="/assets/images/loading-confirm.gif"
+      />
+      <i
+        *ngIf="!submitting"
+        class="fas fa-arrow-circle-right"
+      ></i>
     </button>
   </div>
 </div>

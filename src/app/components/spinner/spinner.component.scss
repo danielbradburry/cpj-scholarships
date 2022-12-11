@@ -1,4 +1,4 @@
-@import "../../../sass/vars.scss";
+@import '../../../sass/vars.scss';
 
 :host {
   position: absolute;
@@ -8,7 +8,7 @@
   width: 100%;
   background: rgba(239, 239, 239, 0.7);
   .spinner:before {
-    content: "";
+    content: '';
     box-sizing: border-box;
     position: absolute;
     top: 50%;

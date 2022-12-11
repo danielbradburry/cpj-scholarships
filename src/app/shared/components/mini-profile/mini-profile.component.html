@@ -4,26 +4,57 @@
     [class.userImageMedium]="config.imageSize === 'medium'"
     [class.userImageLarge]="config.imageSize === 'large'"
     class="me-2"
-    src="{{ user.headshot }}" />
+    src="{{ user.headshot }}"
+  />
   <div class="info">
-    <span class="name text-only">{{ user.fullName }}<span *ngIf="config.includeAppellations && user.appellations">, {{user.appellations}}</span></span>
-    <div *ngIf="config.activeLinks" class="details">
+    <span class="name text-only"
+      >{{ user.fullName }}<span *ngIf="config.includeAppellations && user.appellations">, {{ user.appellations }}</span></span
+    >
+    <div
+      *ngIf="config.activeLinks"
+      class="details"
+    >
       <a
         *ngIf="config.includeEmail && user.email"
         href="mailto:{{ user.email }}"
         (click)="$event.stopPropagation()"
-      ><span class="email">{{ user.email }}</span></a>
+        ><span class="email">{{ user.email }}</span></a
+      >
       <a
         *ngIf="config.includePhone && user.phone"
         href="tel:{{ user.phone }}"
         (click)="$event.stopPropagation()"
-      ><span class="phone">{{ user.phone | phone }}</span></a>
-      <p class="mb-0 memberType" *ngIf="config.includeMemberType && user.memberTypeName">{{ user.memberTypeName }}</p>
+        ><span class="phone">{{ user.phone | phone }}</span></a
+      >
+      <p
+        class="mb-0 memberType"
+        *ngIf="config.includeMemberType && user.memberTypeName"
+      >
+        {{ user.memberTypeName }}
+      </p>
     </div>
-    <div *ngIf="!config.activeLinks" class="details">
-      <div *ngIf="config.includeEmail && user.email" class="email">{{ user.email }}</div>
-      <div *ngIf="config.includePhone && user.phone" class="phone">{{ user.phone | phone }}</div>
-      <p class="mb-0 memberType" *ngIf="config.includeMemberType && user.memberTypeName">{{ user.memberTypeName }}</p>
+    <div
+      *ngIf="!config.activeLinks"
+      class="details"
+    >
+      <div
+        *ngIf="config.includeEmail && user.email"
+        class="email"
+      >
+        {{ user.email }}
+      </div>
+      <div
+        *ngIf="config.includePhone && user.phone"
+        class="phone"
+      >
+        {{ user.phone | phone }}
+      </div>
+      <p
+        class="mb-0 memberType"
+        *ngIf="config.includeMemberType && user.memberTypeName"
+      >
+        {{ user.memberTypeName }}
+      </p>
     </div>
   </div>
 </div>

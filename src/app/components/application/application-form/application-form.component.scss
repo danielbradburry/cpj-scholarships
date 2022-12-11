@@ -1,4 +1,4 @@
-@import "../../../../sass/vars";
+@import '../../../../sass/vars';
 
 :host {
   color: $primaryBlueDark;
@@ -50,12 +50,15 @@ p {
   }
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
   width: 100%;
   font-size: 14px;
 }
 
-input:focus, select:focus {
+input:focus,
+select:focus {
   + .inputTipWrapper {
     display: none;
   }

@@ -7,17 +7,13 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./confirm.component.scss']
 })
 export class ConfirmComponent implements OnInit {
-
   action: any;
   fallback: any;
   statement: string;
 
-  constructor(
-    public activeModal: NgbActiveModal
-  ) { }
+  constructor(public activeModal: NgbActiveModal) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   executeAction() {
     if (typeof this.action === 'function') {

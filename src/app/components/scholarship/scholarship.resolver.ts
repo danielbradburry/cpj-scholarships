@@ -9,21 +9,20 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class ScholarshipResolver implements Resolve<any> {
   private unsubscribe: Subject<void> = new Subject();
-  constructor(
-    private scholarshipService: ScholarshipService
-  ) {}
+  constructor(private scholarshipService: ScholarshipService) {}
 
   resolve(route: ActivatedRouteSnapshot) {
     const scholarshipProgramKey = this.getScholarshipKey(route);
-    
+
     return this.scholarshipService.getScholarshipForView(scholarshipProgramKey, route.params['scholarshipURL']).pipe(
-      catchError(error => {
+      catchError((error) => {
         if (error.status === 404) {
           window.location.href = 'https://cpjam.com';
         } else {
           return of(null);
         }
-      }));
+      })
+    );
   }
 
   getScholarshipKey(route) {

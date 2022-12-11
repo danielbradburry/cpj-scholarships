@@ -7,7 +7,6 @@ import { Subject } from 'rxjs';
   styleUrls: ['./my-scholarships.component.scss']
 })
 export class MyScholarshipsComponent implements OnInit {
-
   applicant: any;
   private unsubscribe: Subject<void> = new Subject();
   @Input() scholarships: any[];
@@ -15,11 +14,9 @@ export class MyScholarshipsComponent implements OnInit {
   @Output() formSubmit: EventEmitter<any> = new EventEmitter();
   @Output() submitted: EventEmitter<any> = new EventEmitter();
 
-  constructor(
-  ) { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngOnDestroy() {
     this.unsubscribe.next();

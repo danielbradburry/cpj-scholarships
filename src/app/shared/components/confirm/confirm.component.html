@@ -1,7 +1,7 @@
 <div class="modal-body">
   <div class="row">
     <div class="form-group col-sm-12">
-      <p>{{statement}}</p>
+      <p>{{ statement }}</p>
     </div>
   </div>
   <div class="buttons">
@@ -11,13 +11,17 @@
       placement="top"
       ngbTooltip="Yes"
       triggers="hover"
-    ><i class="fas fa-check-circle"></i></button>
+    >
+      <i class="fas fa-check-circle"></i>
+    </button>
     <button
       class="btn btn-secondary"
       (click)="fallbackAction(); activeModal.dismiss('Cross click')"
       placement="top"
       triggers="hover"
       ngbTooltip="No"
-    ><i class="fa fa-times-circle"></i></button>
+    >
+      <i class="fa fa-times-circle"></i>
+    </button>
   </div>
 </div>

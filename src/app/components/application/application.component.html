@@ -1,31 +1,53 @@
-<scholarship-heading [program]="program" [active]="0"></scholarship-heading>
+<scholarship-heading
+  [program]="program"
+  [active]="0"
+></scholarship-heading>
 
 <div class="scholarship">
   <h3>
-    {{scholarship?.scholarshipName}}
+    {{ scholarship?.scholarshipName }}
     <button
-      *ngIf="scholarship.isOpen && currentStepIndex < (scholarship?.steps.length - 1)"
+      *ngIf="scholarship.isOpen && currentStepIndex < scholarship?.steps.length - 1"
       class="btn btn-primary finish"
       [disabled]="submitting"
-      (click)="saveForLater()">
-        <span>Finish Later</span>
-        <img *ngIf="submitting" class="loading" src="/assets/images/loading-primary.gif" />
-        <i *ngIf="!submitting" class="fas fa-arrow-circle-right"></i>
+      (click)="saveForLater()"
+    >
+      <span>Finish Later</span>
+      <img
+        *ngIf="submitting"
+        class="loading"
+        src="/assets/images/loading-primary.gif"
+      />
+      <i
+        *ngIf="!submitting"
+        class="fas fa-arrow-circle-right"
+      ></i>
     </button>
     <button
-      *ngIf="scholarship.isOpen && currentStepIndex === (scholarship?.steps.length - 1)"
+      *ngIf="scholarship.isOpen && currentStepIndex === scholarship?.steps.length - 1"
       class="btn btn-confirm finish"
       [disabled]="submitting"
-      (click)="finalSubmit()">
-        <span>Submit Application</span>
-        <img *ngIf="submitting" class="loading" src="/assets/images/loading-confirm.gif" />
-        <i *ngIf="!submitting" class="fas fa-arrow-circle-right"></i>
+      (click)="finalSubmit()"
+    >
+      <span>Submit Application</span>
+      <img
+        *ngIf="submitting"
+        class="loading"
+        src="/assets/images/loading-confirm.gif"
+      />
+      <i
+        *ngIf="!submitting"
+        class="fas fa-arrow-circle-right"
+      ></i>
     </button>
   </h3>
 
   <div class="visual-progress-container">
     <div class="visual-progress-background"></div>
-    <div class="visual-progress" [style.right]="progressAdjustment">
+    <div
+      class="visual-progress"
+      [style.right]="progressAdjustment"
+    >
       <div class="circle"></div>
     </div>
     <div class="actions">
@@ -35,30 +57,34 @@
         [class.hide]="currentStepIndex === 0"
       >
         <i class="fas fa-chevron-left"></i>
-        <span
-          *ngIf="currentStepIndex > 0"
-        >Previous</span>
+        <span *ngIf="currentStepIndex > 0">Previous</span>
       </button>
       <div class="current-step">
         <span>{{ currentStep?.name }}</span>
-        <span>{{ math.round((currentStepIndex / (scholarship?.steps?.length - 1)) * 100)}}% Complete</span>
+        <span>{{ math.round((currentStepIndex / (scholarship?.steps?.length - 1)) * 100) }}% Complete</span>
       </div>
       <button
         (click)="goRight()"
-        [disabled]="!applicant || submitting || (currentStep?.folder && 
-        currentStep?.folder?.minUploads && (currentStep?.folder?.applicationUploads?.length < currentStep?.folder?.minUploads)) ||
-          (currentStep?.form && !currentStep?.formGroup?.valid)"
-        [class.hide]="currentStepIndex === (scholarship?.steps?.length - 1)"
+        [disabled]="
+          !applicant ||
+          submitting ||
+          (currentStep?.folder &&
+            currentStep?.folder?.minUploads &&
+            currentStep?.folder?.applicationUploads?.length < currentStep?.folder?.minUploads) ||
+          (currentStep?.form && !currentStep?.formGroup?.valid)
+        "
+        [class.hide]="currentStepIndex === scholarship?.steps?.length - 1"
       >
-        <span
-          *ngIf="currentStepIndex < (scholarship?.steps.length - 1)"
-        >Next</span>
+        <span *ngIf="currentStepIndex < scholarship?.steps.length - 1">Next</span>
         <i class="fas fa-chevron-right"></i>
       </button>
     </div>
   </div>
 
-  <div *ngIf="application" class="current-step-content">
+  <div
+    *ngIf="application"
+    class="current-step-content"
+  >
     <application-form
       *ngIf="currentStep?.form"
       [formGroup]="currentStep.formGroup"
@@ -78,7 +104,7 @@
       [removing]="removing"
     ></application-folder>
     <app-review
-      *ngIf="currentStepIndex === (scholarship?.steps.length - 1)"
+      *ngIf="currentStepIndex === scholarship?.steps.length - 1"
       [scholarship]="scholarship"
       (stepChanged)="goToStep($event)"
       (finish)="finishNow()"
@@ -87,19 +113,29 @@
     ></app-review>
     <div
       class="buttons"
-      *ngIf="currentStepIndex !== (scholarship?.steps.length - 1)"
+      *ngIf="currentStepIndex !== scholarship?.steps.length - 1"
     >
       <button
         (click)="goRight()"
         class="btn btn-confirm formSubmit"
-        [disabled]="(currentStep?.folder && 
-        currentStep?.folder?.minUploads && (currentStep?.folder?.applicationUploads?.length < currentStep?.folder?.minUploads)) ||
+        [disabled]="
+          (currentStep?.folder &&
+            currentStep?.folder?.minUploads &&
+            currentStep?.folder?.applicationUploads?.length < currentStep?.folder?.minUploads) ||
           (currentStep?.form && !currentStep?.formGroup?.valid) ||
-          submitting"
+          submitting
+        "
       >
         <span>Continue</span>
-        <img *ngIf="submitting" class="loading" src="/assets/images/loading-confirm.gif" />
-        <i *ngIf="!submitting" class="fas fa-arrow-circle-right"></i>
+        <img
+          *ngIf="submitting"
+          class="loading"
+          src="/assets/images/loading-confirm.gif"
+        />
+        <i
+          *ngIf="!submitting"
+          class="fas fa-arrow-circle-right"
+        ></i>
       </button>
     </div>
   </div>

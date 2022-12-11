@@ -10,7 +10,6 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./application-form.component.scss']
 })
 export class ApplicationFormComponent implements OnInit {
-
   @Input() form: any;
   @Input() configuration: any;
   @Input() formGroup: UntypedFormGroup;
@@ -20,18 +19,13 @@ export class ApplicationFormComponent implements OnInit {
   @Output() formSubmit: EventEmitter<any> = new EventEmitter();
   @Output() finishLater: EventEmitter<any> = new EventEmitter();
   private unsubscribe: Subject<void> = new Subject();
-  
-  constructor(
-    private formsService: FormsService,
-    private cdRef: ChangeDetectorRef
-  ) {}
+
+  constructor(private formsService: FormsService, private cdRef: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.formGroup.valueChanges
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe((value) => {
-        this.updatedForm.emit(value);
-      });
+    this.formGroup.valueChanges.pipe(takeUntil(this.unsubscribe)).subscribe((value) => {
+      this.updatedForm.emit(value);
+    });
 
     this.form.applicationFormQuestions.forEach((question) => {
       if (question.type === 'select') {

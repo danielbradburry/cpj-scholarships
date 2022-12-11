@@ -1,4 +1,4 @@
-@import "../../../../sass/vars";
+@import '../../../../sass/vars';
 
 .user {
   padding: 4px 2px;
@@ -10,7 +10,8 @@
     position: relative;
     flex-basis: 1;
     min-width: 0;
-    .name, .email {
+    .name,
+    .email {
       display: block;
     }
   }
@@ -34,7 +35,8 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .memberType, .phone {
+  .memberType,
+  .phone {
     font-size: 12px;
     overflow-x: hidden;
     text-overflow: ellipsis;

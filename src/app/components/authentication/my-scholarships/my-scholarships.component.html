@@ -1,25 +1,39 @@
 <div class="scholarships">
-	<h4>My Scholarship/Grant Opportunities</h4>
-  <p *ngIf="!scholarships?.length && !reloading">
-    You currently have no scholarship applications in progress.
-  </p>
+  <h4>My Scholarship/Grant Opportunities</h4>
+  <p *ngIf="!scholarships?.length && !reloading">You currently have no scholarship applications in progress.</p>
   <a
     class="scholarship"
     *ngFor="let scholarship of scholarships"
-    routerLink="/{{scholarship.url}}"
+    routerLink="/{{ scholarship.url }}"
     queryParamsHandling="preserve"
   >
     <div>
       <span class="name">
-        <span>{{scholarship.name}}</span>
-        <span class="in-progress" *ngIf="scholarship.status === 'started'"> In Progress</span>
-				<span class="submitted" *ngIf="scholarship.status === 'complete'"> Submitted</span>
+        <span>{{ scholarship.name }}</span>
+        <span
+          class="in-progress"
+          *ngIf="scholarship.status === 'started'"
+        >
+          In Progress</span
+        >
+        <span
+          class="submitted"
+          *ngIf="scholarship.status === 'complete'"
+        >
+          Submitted</span
+        >
       </span>
-      <span class="amount" [innerText]="scholarship.amount"></span>
+      <span
+        class="amount"
+        [innerText]="scholarship.amount"
+      ></span>
     </div>
     <div>
       <span>Deadline:</span>
-      <span class="status" [innerText]="scholarship.isOpen ? scholarship.applicationEndDate : 'Ended'"></span>
+      <span
+        class="status"
+        [innerText]="scholarship.isOpen ? scholarship.applicationEndDate : 'Ended'"
+      ></span>
     </div>
   </a>
 </div>

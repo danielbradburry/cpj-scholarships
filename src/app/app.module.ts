@@ -42,8 +42,8 @@ import { FormsService } from './components/application/application-form/forms.se
 
 // Pipes
 import { EncodeUriPipe } from './pipes/encodeURI.pipe';
-import { KeysPipe } from "./pipes/keys.pipe";
-import { SSNPipe } from "./pipes/ssn.pipe";
+import { KeysPipe } from './pipes/keys.pipe';
+import { SSNPipe } from './pipes/ssn.pipe';
 
 // Directives
 import { ViewRefDirective } from './shared/directives/view-ref.directive';
@@ -93,11 +93,9 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     NgxMaskModule.forRoot(),
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
-    }),
+    })
   ],
-  exports: [
-    ViewRefDirective
-  ],
+  exports: [ViewRefDirective],
   providers: [
     ScholarshipService,
     FormsService,
@@ -112,4 +110,4 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

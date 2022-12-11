@@ -4,7 +4,6 @@ import { Pipe } from '@angular/core';
   name: 'ssn',
   pure: false
 })
-
 export class SSNPipe {
   transform(value) {
     if (typeof value === 'undefined' || value === null) {
@@ -14,30 +13,42 @@ export class SSNPipe {
       return value;
     }
 
-    let indices = [{
-      character: '-',
-      placement: 6
-    }, {
-      character: '&bull;',
-      placement: 5
-    }, {
-      character: '&bull;',
-      placement: 4
-    }, {
-      character: '-',
-      placement: 3
-    }, {
-      character: '&bull;',
-      placement: 2
-    }, {
-      character: '&bull;',
-      placement: 1
-    }, {
-      character: '&bull;',
-      placement: 0
-    }];
-    
-    value = value.trim().replace(/^\+/, '').replace(/[^0-9]/g, '').slice(0, 9);
+    let indices = [
+      {
+        character: '-',
+        placement: 6
+      },
+      {
+        character: '&bull;',
+        placement: 5
+      },
+      {
+        character: '&bull;',
+        placement: 4
+      },
+      {
+        character: '-',
+        placement: 3
+      },
+      {
+        character: '&bull;',
+        placement: 2
+      },
+      {
+        character: '&bull;',
+        placement: 1
+      },
+      {
+        character: '&bull;',
+        placement: 0
+      }
+    ];
+
+    value = value
+      .trim()
+      .replace(/^\+/, '')
+      .replace(/[^0-9]/g, '')
+      .slice(0, 9);
 
     if (value.length === 0) {
       return value;
@@ -46,7 +57,7 @@ export class SSNPipe {
     for (let i = 0; i < indices.length; i++) {
       value = this.insertCharacter(indices[i].character, value, indices[i].placement);
     }
-    
+
     return value;
   }
 
@@ -58,4 +69,3 @@ export class SSNPipe {
     return str.slice(0, index) + char + str.slice(index, str.length);
   }
 }
-

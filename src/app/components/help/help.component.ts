@@ -21,27 +21,19 @@ export class HelpComponent implements OnInit {
   };
   private unsubscribe: Subject<void> = new Subject();
 
-  constructor(
-    private scholarshipService: ScholarshipService,
-    private route: ActivatedRoute
-  ) { }
+  constructor(private scholarshipService: ScholarshipService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.scholarshipService.currentProgram
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe((data) => {
-        this.program = data;
-      });
+    this.scholarshipService.currentProgram.pipe(takeUntil(this.unsubscribe)).subscribe((data) => {
+      this.program = data;
+    });
 
-    this.scholarshipService.currentApplicant
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe((data) => {
-        this.applicant = data;
-      });
+    this.scholarshipService.currentApplicant.pipe(takeUntil(this.unsubscribe)).subscribe((data) => {
+      this.applicant = data;
+    });
 
-    this.route.data
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe((response: any) => {
+    this.route.data.pipe(takeUntil(this.unsubscribe)).subscribe(
+      (response: any) => {
         if (response.data.program) {
           this.scholarshipService.setProgram(response.data.program);
         } else {
@@ -53,7 +45,8 @@ export class HelpComponent implements OnInit {
       },
       () => {
         this.redirectToMainSite();
-      });
+      }
+    );
   }
 
   redirectToMainSite() {

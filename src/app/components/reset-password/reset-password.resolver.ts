@@ -15,13 +15,14 @@ export class ResetPasswordResolver implements Resolve<any> {
     const scholarshipProgramKey = this.getScholarshipKey(route);
 
     return this.scholarshipService.getPasswordKey(scholarshipProgramKey, route.params.authKey).pipe(
-      catchError(error => {
+      catchError((error) => {
         if (error.status === 404) {
           window.location.href = 'https://cpjam.com';
         } else {
           return of(null);
         }
-      }));
+      })
+    );
   }
 
   getScholarshipKey(route) {

@@ -1,12 +1,18 @@
-<h3>{{form.name}}</h3>
-<div class="form" [formGroup]="formGroup">
-  <div *ngFor="let question of form.applicationFormQuestions" class="row">
+<h3>{{ form.name }}</h3>
+<div
+  class="form"
+  [formGroup]="formGroup"
+>
+  <div
+    *ngFor="let question of form.applicationFormQuestions"
+    class="row"
+  >
     <div class="col-sm-12">
       <h1 *ngIf="question.type === 'heading'">{{ question.label }}</h1>
       <p *ngIf="question.type === 'paragraph'">{{ question.label }}</p>
       <label
         *ngIf="question.type !== 'paragraph' && question.type !== 'heading'"
-        for="{{question.name}}"
+        for="{{ question.name }}"
         [class.checkboxLabel]="question.type === 'checkbox'"
       >
         <span *ngIf="question.required">* </span>{{ question.label }}
@@ -17,7 +23,8 @@
           type="text"
           class="form-control"
           (ngModelChange)="formChanged()"
-          formControlName="{{question.name}}" />
+          formControlName="{{ question.name }}"
+        />
         <input
           autocomplete="new-password"
           *ngIf="question.type === 'email'"
@@ -26,8 +33,9 @@
           class="form-control"
           placeholder="Email Address"
           (ngModelChange)="formChanged()"
-          formControlName="{{question.name}}" />
-        <input 
+          formControlName="{{ question.name }}"
+        />
+        <input
           autocomplete="new-password"
           *ngIf="question.type === 'phone'"
           [required]="question.required"
@@ -36,7 +44,8 @@
           placeholder="XXX-XXX-XXXX"
           mask="000-000-0000"
           (ngModelChange)="formChanged()"
-          formControlName="{{question.name}}" />
+          formControlName="{{ question.name }}"
+        />
         <input
           autocomplete="new-password"
           *ngIf="question.type === 'ssn'"
@@ -46,7 +55,8 @@
           placeholder="XXX-XX-XXXX"
           mask="XXX-XX-0000"
           [hiddenInput]="true"
-          formControlName="{{question.name}}" />
+          formControlName="{{ question.name }}"
+        />
         <textarea-restrict
           autocomplete="new-password"
           onfocusout="this.classList.remove('active')"
@@ -54,37 +64,68 @@
           [element]="question"
           [group]="formGroup"
           (valueChanged)="formChanged()"
-          *ngIf="question.type === 'textarea'"></textarea-restrict>
-        <input *ngIf="question.type === 'checkbox'"
-          id="{{question.name}}"
+          *ngIf="question.type === 'textarea'"
+        ></textarea-restrict>
+        <input
+          *ngIf="question.type === 'checkbox'"
+          id="{{ question.name }}"
           [required]="question.required"
           type="checkbox"
           class="checkbox form-control"
           (ngModelChange)="formChanged()"
-          formControlName="{{question.name}}" />
-        <select *ngIf="question.type === 'select'" class="form-control" formControlName="{{question.name}}" (ngModelChange)="formChanged()">
-          <option *ngFor="let option of question.options" [value]="option.data">{{option.data}}</option>
+          formControlName="{{ question.name }}"
+        />
+        <select
+          *ngIf="question.type === 'select'"
+          class="form-control"
+          formControlName="{{ question.name }}"
+          (ngModelChange)="formChanged()"
+        >
+          <option
+            *ngFor="let option of question.options"
+            [value]="option.data"
+          >
+            {{ option.data }}
+          </option>
         </select>
         <div
           autocomplete="new-password"
           *ngIf="question.type === 'date'"
           class="input-group"
           onfocusout="this.classList.remove('active')"
-          onfocusin="this.classList.add('active')">
+          onfocusin="this.classList.add('active')"
+        >
           <input
             [required]="question.required"
             class="form-control"
             placeholder="MM-DD-YYYY"
-            formControlName="{{question.name}}"
+            formControlName="{{ question.name }}"
             ngbDatepicker
             #d="ngbDatepicker"
-            (ngModelChange)="formChanged()">
-          <div class="input-group-append" *ngIf="!scoringView">
-            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i class="far fa-calendar-alt"></i></button>
+            (ngModelChange)="formChanged()"
+          />
+          <div
+            class="input-group-append"
+            *ngIf="!scoringView"
+          >
+            <button
+              class="btn btn-outline-secondary calendar"
+              (click)="d.toggle()"
+              type="button"
+            >
+              <i class="far fa-calendar-alt"></i>
+            </button>
           </div>
         </div>
-        <div class="inputTipWrapper" *ngFor="let error of formGroup.controls[question.name].errors | keys">
-          <span *ngIf="formGroup.controls[question.name].touched && question[error.key + 'ErrorLabel']" class="inputTip">{{question[error.key + 'ErrorLabel']}}</span>
+        <div
+          class="inputTipWrapper"
+          *ngFor="let error of formGroup.controls[question.name].errors | keys"
+        >
+          <span
+            *ngIf="formGroup.controls[question.name].touched && question[error.key + 'ErrorLabel']"
+            class="inputTip"
+            >{{ question[error.key + 'ErrorLabel'] }}</span
+          >
         </div>
       </label>
     </div>

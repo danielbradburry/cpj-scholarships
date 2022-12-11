@@ -18,31 +18,29 @@ export class ReviewComponent implements OnInit {
   @Input() scholarshipProgramURL: string;
   private unsubscribe: Subject<void> = new Subject();
 
-  constructor(
-    public activeModal: NgbActiveModal,
-    private toastr: ToastrService,
-    private scholarshipService: ScholarshipService
-  ) { }
+  constructor(public activeModal: NgbActiveModal, private toastr: ToastrService, private scholarshipService: ScholarshipService) {}
 
   ngOnInit(): void {
     this.loading = true;
-    this.scholarshipService.getScholarshipApplication(this.scholarshipProgramURL, this.scholarshipURL)
+    this.scholarshipService
+      .getScholarshipApplication(this.scholarshipProgramURL, this.scholarshipURL)
       .pipe(takeUntil(this.unsubscribe))
-      .subscribe((response: any) => {
-        if (response.error) {
-          this.toastr.error(response.error, 'Error!');
-          return;
+      .subscribe(
+        (response: any) => {
+          if (response.error) {
+            this.toastr.error(response.error, 'Error!');
+            return;
+          }
+          if (response.valid) {
+            this.scholarship = response.scholarship;
+          }
+        },
+        (error: HttpErrorResponse) => {
+          this.toastr.error(error.message, 'Error!');
         }
-        if (response.valid) {
-          this.scholarship = response.scholarship;
-        } 
-      },
-      (error: HttpErrorResponse) => {
-        this.toastr.error(error.message, 'Error!');
-      })
+      )
       .add(() => {
         this.loading = false;
       });
   }
-
 }

@@ -1,4 +1,4 @@
-@import "./vars";
+@import './vars';
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~ngx-toastr/toastr.css';
 
@@ -16,13 +16,14 @@ router-outlet + * {
 
 label {
   display: block;
-  font-size: .8rem;
+  font-size: 0.8rem;
   position: relative;
 }
 
 a {
   color: $primaryBlue;
-  &:hover, &:active {
+  &:hover,
+  &:active {
     color: $primaryBlueLight;
   }
 }
@@ -59,13 +60,13 @@ select.form-control {
   appearance: menulist;
 }
 
-input[type=checkbox].form-control {
+input[type='checkbox'].form-control {
   -webkit-appearance: checkbox;
   -moz-appearance: checkbox;
   appearance: checkbox;
 }
 
-input[type=number].form-control {
+input[type='number'].form-control {
   -webkit-appearance: textfield;
   -moz-appearance: textfield;
   appearance: textfield;
@@ -83,20 +84,21 @@ textarea.form-control {
   appearance: textarea;
 }
 
-  ngb-datepicker {
-    select.form-select {
-      background-image: none;
-      -webkit-appearance: menulist !important;
-      -moz-appearance: menulist !important;
-      appearance: menulist !important;
-    }
-    .ngb-dp-arrow .btn-link, .ngb-dp-weekday {
-      color: $primaryBlue;
-    }
-    .bg-primary {
-      background-color: $primaryBlue !important;
-    }
+ngb-datepicker {
+  select.form-select {
+    background-image: none;
+    -webkit-appearance: menulist !important;
+    -moz-appearance: menulist !important;
+    appearance: menulist !important;
   }
+  .ngb-dp-arrow .btn-link,
+  .ngb-dp-weekday {
+    color: $primaryBlue;
+  }
+  .bg-primary {
+    background-color: $primaryBlue !important;
+  }
+}
 
 .note {
   color: $grayDark;
@@ -104,7 +106,8 @@ textarea.form-control {
   font-size: 12px;
   font-weight: 400;
   border: 1px solid $grayDark;
-  &.closed, &.warning {
+  &.closed,
+  &.warning {
     border: 1px solid $redDark;
     color: $redDark;
   }
@@ -118,7 +121,10 @@ textarea.form-control {
   margin: 0 4px -1px;
 }
 
-input:focus, input:active, textarea:focus, textarea:active {
+input:focus,
+input:active,
+textarea:focus,
+textarea:active {
   & + .inputTip {
     display: none;
   }
@@ -194,11 +200,14 @@ input:focus, input:active, textarea:focus, textarea:active {
   }
 }
 
-.btn-primary, .btn-primary.disabled, .btn-primary:disabled {
+.btn-primary,
+.btn-primary.disabled,
+.btn-primary:disabled {
   background: $primaryBlue;
   color: $offWhite;
   border-color: $primaryBlue;
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background: $primaryBlueLight;
     border-color: $primaryBlue;
     color: $white;
@@ -213,11 +222,14 @@ input:focus, input:active, textarea:focus, textarea:active {
   }
 }
 
-.btn-secondary, .btn-secondary.disabled, .btn-secondary:disabled {
+.btn-secondary,
+.btn-secondary.disabled,
+.btn-secondary:disabled {
   background: $grayDark;
   border-color: $grayDark;
   color: $offWhite;
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background: $gray;
     color: $white;
   }
@@ -230,11 +242,14 @@ input:focus, input:active, textarea:focus, textarea:active {
   }
 }
 
-.btn-danger,.btn-danger.disabled, .btn-danger:disabled {
+.btn-danger,
+.btn-danger.disabled,
+.btn-danger:disabled {
   background: $redDark;
   border-color: $redDark;
   color: $offWhite;
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background: $red;
     border-color: $red;
     color: $white;
@@ -249,11 +264,14 @@ input:focus, input:active, textarea:focus, textarea:active {
   }
 }
 
-.btn-confirm, .btn-confirm.disabled, .btn-confirm:disabled {
+.btn-confirm,
+.btn-confirm.disabled,
+.btn-confirm:disabled {
   background: $green;
   border-color: $green;
   color: $offWhite;
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background: $greenLight;
     color: $white;
   }
@@ -266,18 +284,19 @@ input:focus, input:active, textarea:focus, textarea:active {
   }
 }
 
-.btn.disabled, .btn:disabled {
+.btn.disabled,
+.btn:disabled {
   opacity: 0.7;
 }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   appearance: none;
-  margin: 0; 
+  margin: 0;
 }
 
-input[type=file] {
+input[type='file'] {
   font-size: 12px;
 }
 
@@ -286,7 +305,7 @@ input[type=file] {
   background-image: none;
   &:before {
     position: absolute;
-    font-family: Font Awesome\ 5 Free;
+    font-family: Font Awesome\5 Free;
     font-size: 24px;
     top: 20px;
     left: 15px;
@@ -295,7 +314,7 @@ input[type=file] {
     border: 2px solid $green;
     color: $green;
     &:before {
-      content: "\f058";
+      content: '\f058';
     }
   }
 
@@ -303,7 +322,7 @@ input[type=file] {
     border: 2px solid $redDark;
     color: $redDark;
     &:before {
-      content: "\f057";
+      content: '\f057';
     }
   }
 }
@@ -419,7 +438,7 @@ input[type=file] {
   }
 
   .accordionLabel {
-    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
     font-weight: 700;
     font-size: 20px;
   }
@@ -428,12 +447,12 @@ input[type=file] {
     font-size: 14px;
     font-style: italic;
   }
-  
+
   .chevron {
     transition: all 0.5s ease 0s;
-    display:block;
+    display: block;
     font-size: 25px;
-    height:35px;
+    height: 35px;
     width: 35px;
     transform: rotate(0deg);
     color: $primaryBlue;
@@ -471,9 +490,7 @@ ngb-accordion.accordion {
 .cdk-drag-preview {
   box-sizing: border-box;
   border-radius: 4px;
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-              0 8px 10px 1px rgba(0, 0, 0, 0.14),
-              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
   z-index: 1551 !important;
 }
 
@@ -538,7 +555,8 @@ i[cdkdraghandle] {
   }
   > .cdk-item {
     &:hover {
-      > i[cdkdraghandle], > div > i[cdkdraghandle] {
+      > i[cdkdraghandle],
+      > div > i[cdkdraghandle] {
         opacity: 1;
       }
     }
@@ -631,7 +649,8 @@ ngb-carousel {
       top: 0;
       width: 100%;
     }
-    .submitted, .carousel-caption {
+    .submitted,
+    .carousel-caption {
       position: absolute;
       bottom: 0;
       width: 100%;
@@ -645,7 +664,7 @@ nav.navbar {
   .nav-item {
     line-height: 18px;
     .nav-link {
-      color: #BBB;
+      color: #bbb;
       padding-top: 0;
       padding-bottom: 0;
       transition: all 0.5s ease 0s;
@@ -745,7 +764,7 @@ nav.navbar {
       max-height: calc(100vh - 100px);
     }
   }
-  
+
   .modal-footer {
     .buttons {
       width: 100%;
@@ -767,7 +786,8 @@ nav.navbar {
 }
 
 @media print {
-  header, footer {
+  header,
+  footer {
     display: none;
   }
 }

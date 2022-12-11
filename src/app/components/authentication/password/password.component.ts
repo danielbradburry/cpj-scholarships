@@ -11,7 +11,6 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./password.component.scss']
 })
 export class ChangePasswordComponent implements OnInit {
-
   private unsubscribe: Subject<void> = new Subject();
   formConfiguration: any;
   applicant: any;
@@ -19,35 +18,37 @@ export class ChangePasswordComponent implements OnInit {
   @Input() reloading: boolean;
   @Output() submitted: EventEmitter<any> = new EventEmitter();
 
-  constructor(
-    private toastr: ToastrService,
-    private scholarshipService: ScholarshipService
-  ) { }
+  constructor(private toastr: ToastrService, private scholarshipService: ScholarshipService) {}
 
   ngOnInit() {
     this.formConfiguration = {
       formElements: {
-        rows: [{
-          elements: [{
-            class: 'form-group col-sm-6',
-            label: 'New Password',
-            name: 'newPassword',
-            type: 'password',
-            required: true,
-            value: '',
-            requiredErrorLabel: 'Password required',
-            patternErrorLabel: 'Minimum 7 characters, requires upper, lower and numeric.'
-          }, {
-            class: 'form-group col-sm-6',
-            label: 'Confirm Password',
-            name: 'confirm',
-            type: 'password',
-            required: true,
-            value: '',
-            mustMatch: 'newPassword',
-            mustMatchErrorLabel: 'Passwords must match.'
-          }]
-        }]
+        rows: [
+          {
+            elements: [
+              {
+                class: 'form-group col-sm-6',
+                label: 'New Password',
+                name: 'newPassword',
+                type: 'password',
+                required: true,
+                value: '',
+                requiredErrorLabel: 'Password required',
+                patternErrorLabel: 'Minimum 7 characters, requires upper, lower and numeric.'
+              },
+              {
+                class: 'form-group col-sm-6',
+                label: 'Confirm Password',
+                name: 'confirm',
+                type: 'password',
+                required: true,
+                value: '',
+                mustMatch: 'newPassword',
+                mustMatchErrorLabel: 'Passwords must match.'
+              }
+            ]
+          }
+        ]
       },
       submitCTA: 'Change'
     };
@@ -56,21 +57,24 @@ export class ChangePasswordComponent implements OnInit {
   submit(form) {
     this.submitting = true;
 
-    this.scholarshipService.changePassword(form.value)
+    this.scholarshipService
+      .changePassword(form.value)
       .pipe(takeUntil(this.unsubscribe))
-      .subscribe((response: any) => {
-        if (response.error) {
-          this.toastr.error(response.error, 'Error!');
-          return;
+      .subscribe(
+        (response: any) => {
+          if (response.error) {
+            this.toastr.error(response.error, 'Error!');
+            return;
+          }
+          if (response.valid) {
+            this.toastr.success('Changes saved', 'Success!');
+            this.submitted.emit(true);
+          }
+        },
+        (error: HttpErrorResponse) => {
+          this.toastr.error(error.message, 'Error!');
         }
-        if (response.valid) {
-          this.toastr.success('Changes saved', 'Success!');
-          this.submitted.emit(true);
-        } 
-      },
-      (error: HttpErrorResponse) => {
-        this.toastr.error(error.message, 'Error!');
-      })
+      )
       .add(() => {
         this.submitting = false;
       });

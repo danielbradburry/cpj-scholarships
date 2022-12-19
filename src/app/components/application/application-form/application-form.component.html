@@ -5,7 +5,7 @@
 >
   <div
     *ngFor="let question of form.applicationFormQuestions"
-    class="row"
+    class="row question"
   >
     <div class="col-sm-12">
       <h1 *ngIf="question.type === 'heading'">{{ question.label }}</h1>
@@ -18,40 +18,41 @@
         <span *ngIf="question.required">* </span>{{ question.label }}
         <input
           autocomplete="new-password"
+          [class.error]="formGroup.controls[question.name].errors && formGroup.controls[question.name].touched"
           *ngIf="question.type === 'text'"
           [required]="question.required"
           type="text"
-          class="form-control"
-          (ngModelChange)="formChanged()"
+          class="form-control text"
           formControlName="{{ question.name }}"
         />
         <input
           autocomplete="new-password"
           *ngIf="question.type === 'email'"
+          [class.error]="formGroup.controls[question.name].errors && formGroup.controls[question.name].touched"
           [required]="question.required"
           type="text"
-          class="form-control"
+          class="form-control email"
           placeholder="Email Address"
-          (ngModelChange)="formChanged()"
           formControlName="{{ question.name }}"
         />
         <input
           autocomplete="new-password"
           *ngIf="question.type === 'phone'"
+          [class.error]="formGroup.controls[question.name].errors && formGroup.controls[question.name].touched"
           [required]="question.required"
           type="tel"
-          class="form-control"
+          class="form-control phone"
           placeholder="XXX-XXX-XXXX"
           mask="000-000-0000"
-          (ngModelChange)="formChanged()"
           formControlName="{{ question.name }}"
         />
         <input
           autocomplete="new-password"
           *ngIf="question.type === 'ssn'"
+          [class.error]="formGroup.controls[question.name].errors && formGroup.controls[question.name].touched"
           [required]="question.required"
           type="text"
-          class="form-control"
+          class="form-control ssn"
           placeholder="XXX-XX-XXXX"
           mask="XXX-XX-0000"
           [hiddenInput]="true"
@@ -63,23 +64,21 @@
           onfocusin="this.classList.add('active')"
           [element]="question"
           [group]="formGroup"
-          (valueChanged)="formChanged()"
           *ngIf="question.type === 'textarea'"
         ></textarea-restrict>
         <input
+          [class.error]="formGroup.controls[question.name].errors && formGroup.controls[question.name].dirty"
           *ngIf="question.type === 'checkbox'"
           id="{{ question.name }}"
           [required]="question.required"
           type="checkbox"
           class="checkbox form-control"
-          (ngModelChange)="formChanged()"
           formControlName="{{ question.name }}"
         />
         <select
           *ngIf="question.type === 'select'"
           class="form-control"
           formControlName="{{ question.name }}"
-          (ngModelChange)="formChanged()"
         >
           <option
             *ngFor="let option of question.options"
@@ -91,18 +90,18 @@
         <div
           autocomplete="new-password"
           *ngIf="question.type === 'date'"
-          class="input-group"
+          class="input-group date"
           onfocusout="this.classList.remove('active')"
           onfocusin="this.classList.add('active')"
         >
           <input
             [required]="question.required"
+            [class.error]="formGroup.controls[question.name].errors && formGroup.controls[question.name].touched"
             class="form-control"
             placeholder="MM-DD-YYYY"
             formControlName="{{ question.name }}"
             ngbDatepicker
             #d="ngbDatepicker"
-            (ngModelChange)="formChanged()"
           />
           <div
             class="input-group-append"
@@ -123,8 +122,14 @@
         >
           <span
             *ngIf="
-              formGroup.controls[question.name].touched &&
-              question[error.key + 'ErrorLabel']
+              question.type !== 'textarea' && (
+              question.type === 'checkbox' ? (
+                formGroup.controls[question.name].dirty &&
+                question[error.key + 'ErrorLabel']
+              ) : (
+                formGroup.controls[question.name].touched &&
+                question[error.key + 'ErrorLabel']
+              ))
             "
             class="inputTip"
             >{{ question[error.key + 'ErrorLabel'] }}</span

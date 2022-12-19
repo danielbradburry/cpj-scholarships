@@ -19,7 +19,7 @@
     </h4>
     <div
       class="step-content"
-      *ngIf="step.form && !step.hideFromReview"
+      *ngIf="step.form && !step.form.hideFromReview"
     >
       <div
         class="question"
@@ -33,7 +33,7 @@
     </div>
     <div
       class="step-content"
-      *ngIf="step.folder && !step.hideFromReview"
+      *ngIf="step.folder && !step.folder.hideFromReview"
     >
       <p
         *ngIf="!step.folder.applicationUploads?.length"

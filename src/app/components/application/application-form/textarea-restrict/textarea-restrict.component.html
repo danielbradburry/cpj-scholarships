@@ -1,6 +1,7 @@
 <div [formGroup]="group">
   <textarea
     [required]="element.required"
+    [class.error]="group.controls[element.name].errors && group.controls[element.name].touched"
     autocomplete="new-password"
     formControlName="{{ element.name }}"
     class="form-control"
@@ -8,6 +9,19 @@
     [value]="element.value"
     (ngModelChange)="reportChange()"
   ></textarea>
+  <div
+    class="inputTipWrapper"
+    *ngFor="let error of group.controls[element.name].errors | keys"
+  >
+    <span
+      *ngIf="
+      group.controls[element.name].touched &&
+        element[error.key + 'ErrorLabel']
+      "
+      class="inputTip"
+      >{{ element[error.key + 'ErrorLabel'] }}</span
+    >
+  </div>
   <div
     class="limit"
     *ngIf="element.maxWords && !overLimit"

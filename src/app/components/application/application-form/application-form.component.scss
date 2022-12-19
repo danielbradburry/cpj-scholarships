@@ -10,9 +10,38 @@
   }
 }
 
+.inputTipWrapper {
+  display: none;
+}
+
 .form {
   background: $offWhite;
   padding: 8px 12px;
+}
+
+.question {
+  textarea-restrict {
+    display: block;
+  }
+  select {
+    width: auto;
+    max-width: auto;
+  }
+  .email {
+    max-width: 200px;
+  }
+  .text {
+    max-width: 350px;
+  }
+  .phone {
+    max-width: 100px;
+  }
+  .date {
+    max-width: 120px;
+  }
+  .ssn {
+    max-width: 80px;
+  }
 }
 
 h1 {
@@ -41,12 +70,19 @@ p {
   position: relative;
   padding-left: 20px;
   margin: 2px 0;
+  cursor: pointer;
   .checkbox {
     position: absolute;
     width: 14px;
-    box-shadow: none;
     top: 2px;
     left: 0;
+    &.error {
+      border-radius: 0;
+      height: 14px;
+      appearance: none;
+      border: 1px solid $redDark;
+      box-shadow: none;
+    }
   }
 }
 
@@ -54,13 +90,29 @@ input,
 textarea,
 select {
   width: 100%;
-  font-size: 14px;
+  font-size: 12px;
+  padding: 4px;
+  &.error {
+    border: 1px solid $redDark;
+    box-shadow: none;
+    & + .inputTipWrapper {
+      display: block;
+    }
+  }
 }
 
-input:focus,
-select:focus {
-  + .inputTipWrapper {
-    display: none;
+label:focus {
+  input, select, textarea {
+    + .inputTipWrapper {
+      display: none;
+    }
+  }
+}
+input, select, textarea {
+  &:focus {
+    + .inputTipWrapper {
+      display: none;
+    }
   }
 }
 

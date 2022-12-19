@@ -15,11 +15,15 @@
     <div
       class="review"
       *ngFor="let step of scholarship.steps; let i = index"
+      [class.hide]="
+        (!step.form || step.form?.hideFromReview) &&
+        (!step.folder || step.folder?.hideFromReview)
+      "
     >
-      <h4 class="step">{{ step.name }}</h4>
+      <h4>{{step.name}}</h4>
       <div
         class="step-content"
-        *ngIf="step.form"
+        *ngIf="step.form && !step.form.hideFromReview"
       >
         <div
           class="question"
@@ -33,7 +37,7 @@
       </div>
       <div
         class="step-content"
-        *ngIf="step.folder"
+        *ngIf="step.folder && !step.folder.hideFromReview"
       >
         <p
           *ngIf="!step.folder.applicationUploads?.length"

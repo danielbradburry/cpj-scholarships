@@ -103,7 +103,6 @@ export class ThirdPartyUploadComponent implements OnInit {
         .pipe(takeUntil(this.unsubscribe))
         .subscribe(
           (event: any) => {
-            console.log('got event', event)
             if (event.type === HttpEventType.UploadProgress) {
               fileUpload.uploadProgress = event;
             } else if (event.type === HttpEventType.Response) {
@@ -136,6 +135,8 @@ export class ThirdPartyUploadComponent implements OnInit {
         .add(() => {
           this.fileUploads.splice(this.fileUploads.indexOf(fileUpload), 1);
           this.submitting = false;
+          const input = document.querySelector('#upload') as HTMLButtonElement;
+          input.value = null;
           resolve(null);
         });
     });

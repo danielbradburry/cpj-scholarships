@@ -145,7 +145,8 @@ export class ApplicationComponent implements OnInit {
     if (this.currentStep.form) {
       const finishLaterButton = document.querySelector(
         '#applicationFormFinishLater'
-      ) as HTMLElement;
+      ) as HTMLButtonElement;
+      finishLaterButton.disabled = false;
       finishLaterButton.click();
     } else {
       this.router.navigate(['/'], { queryParamsHandling: 'preserve' });
@@ -237,6 +238,8 @@ export class ApplicationComponent implements OnInit {
       .add(() => {
         this.submitting = false;
         this.fileUploads.splice(this.fileUploads.indexOf(fileUpload), 1);
+        const input = document.querySelector('#upload') as HTMLButtonElement;
+        input.value = null;
       });
   }
 

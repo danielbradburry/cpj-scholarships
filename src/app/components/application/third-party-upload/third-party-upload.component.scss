@@ -1,0 +1,90 @@
+@import '../../../../sass/vars';
+
+h3 {
+  font-size: 20px;
+  border-bottom: 2px solid $grayDark;
+  padding: 24px 0 8px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+#upload {
+  display: none;
+}
+
+.coordinators {
+  margin-bottom: 20px;
+  font-size: 14px;
+  border: 2px solid $grayLight;
+  padding: 8px;
+}
+
+.folder {
+  border: 2px solid $grayLight;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  h4 {
+    font-weight: 700;
+    font-size: 16px;
+    border-bottom: 1px solid $primaryBlueDark;
+  }
+  .content {
+    background: $offWhite;
+    padding: 8px 12px;
+    .status {
+      font-size: 12px;
+      margin-top: 8px;
+      span {
+        font-weight: 700;
+      }
+      .warning {
+        color: $redDark;
+      }
+    }
+    .files {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 12px;
+      margin-top: 12px;
+      .file {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 0;
+        .btn-danger {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 30px;
+          width: 34px;
+        }
+        .name {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          > div, a {
+            font-size: 14px;
+          }
+          &.heading {
+            padding-left: 45px;
+            border-bottom: 1px solid $primaryBlueDark;
+            > div {
+              font-size: 14px;
+              font-weight: 700;
+            }
+          }
+          &.no-file {
+            padding-left: 45px;
+            > div {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

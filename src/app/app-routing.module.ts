@@ -2,16 +2,19 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
-import { AuthenticationComponent } from './components/authentication/authentication.component';
+import { ApplicantComponent } from './components/applicant/applicant.component';
 import { HelpComponent } from './components/help/help.component';
 import { ScholarshipComponent } from './components/scholarship/scholarship.component';
 import { ApplicationComponent } from './components/application/application.component';
 import { ApplicantResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ThirdPartyUploadComponent } from './components/application/third-party-upload/third-party-upload.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 import { HomeResolver } from './components/home/home.resolver';
 import { ScholarshipResolver } from './components/scholarship/scholarship.resolver';
 import { ApplicationResolver } from './components/application/application.resolver';
 import { ResetPasswordResolver } from './components/reset-password/reset-password.resolver';
+import { ThirdPartyRequestResolver } from './components/application/third-party-upload/third-party-upload.resolver';
 
 const appRoutes: Routes = [
   {
@@ -24,7 +27,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'account',
-    component: AuthenticationComponent,
+    component: ApplicantComponent,
     runGuardsAndResolvers: 'always',
     resolve: {
       data: HomeResolver
@@ -38,6 +41,7 @@ const appRoutes: Routes = [
       data: HomeResolver
     }
   },
+  { path: '404', component: NotFoundComponent },
   {
     path: ':scholarshipURL',
     component: ScholarshipComponent,
@@ -60,7 +64,15 @@ const appRoutes: Routes = [
     resolve: {
       data: ResetPasswordResolver
     }
-  }
+  },
+  {
+    path: ':scholarshipURL/applications/:applicationID/:requestID',
+    component: ThirdPartyUploadComponent,
+    resolve: {
+      data: ThirdPartyRequestResolver
+    }
+  },
+  { path: '**', redirectTo: '404' }
 ];
 
 @NgModule({
@@ -70,7 +82,8 @@ const appRoutes: Routes = [
     HomeResolver,
     ScholarshipResolver,
     ApplicationResolver,
-    ResetPasswordResolver
+    ResetPasswordResolver,
+    ThirdPartyRequestResolver
   ]
 })
 export class AppRoutingModule {}

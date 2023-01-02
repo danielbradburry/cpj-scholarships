@@ -1,0 +1,70 @@
+@import '../../../../../sass/vars';
+
+p {
+  font-size: 14px;
+}
+
+.request {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $grayLight;
+  padding: 8px;
+  border-radius: 8px;
+  background: $offWhite;
+  .info {
+    display: flex;
+    align-items: center;
+    gap: 0px;
+    justify-content: space-between;
+    border-bottom: 2px solid $grayLight;
+    padding-bottom: 8px;
+    font-size: 14px;
+    .email {
+      font-weight: 700;
+      span {
+        font-weight: 400;
+      }
+    }
+    > div {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      > div {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        font-size: 12px;
+      }
+    }
+    .actions {
+      .btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+    }
+  }
+  .uploads {
+    font-size: 14px;
+    padding: 8px 0 0;
+    font-weight: 700;
+    p {
+      margin: 4px 0;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 12px;
+    }
+  }
+}
+
+.request {
+  ~ .request {
+    margin-top: 12px;
+  }
+  + auto-form {
+    border-top: 2px solid $grayLight;
+    display: block;
+    padding-top: 15px;
+    margin-top: 30px;
+  }
+} 

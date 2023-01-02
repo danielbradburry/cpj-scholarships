@@ -21,18 +21,13 @@
 
 .status {
   font-size: 12px;
-  padding-top: 12px;
-  margin-top: 12px;
+  margin-top: 8px;
   span {
     font-weight: 700;
   }
   .warning {
     color: $redDark;
   }
-}
-
-.empty {
-  margin-top: 10px;
 }
 
 upload-progress {
@@ -45,19 +40,22 @@ upload-progress {
   font-weight: 700;
 }
 
+#upload {
+  display: none;
+}
+
 .files {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  border: 2px solid $gray;
-  padding: 12px 12px;
+  padding: 12px;
   margin-top: 12px;
-  max-width: 350px;
   .file {
     margin: 0;
     display: flex;
     align-items: center;
     gap: 12px;
+    padding: 0;
     .btn-danger {
       display: flex;
       align-items: center;
@@ -67,26 +65,41 @@ upload-progress {
     }
     .name {
       display: flex;
-      flex-direction: column;
-      gap: 4px;
-      border-left: 2px solid $grayLight;
-      max-width: calc(100% - 115px);
-      padding-left: 12px;
-      span:first-child {
-        font-weight: 700;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      > div, a {
         font-size: 14px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
       }
-      span:last-child {
-        font-style: italic;
-        font-size: 12px;
+      &.heading {
+        padding-left: 45px;
+        border-bottom: 1px solid $primaryBlueDark;
+        > div {
+          font-size: 14px;
+          font-weight: 700;
+        }
+      }
+      &.no-file {
+        padding-left: 45px;
+        > div {
+          font-size: 14px;
+        }
       }
     }
-    ~ .file {
-      border-top: 1px solid $grayLight;
-      padding-top: 12px;
+  }
+}
+
+.third-party {
+  border-top: 2px solid $grayLight;
+  padding: 12px 0 0;
+  p {
+    font-size: 14px;
+    margin: 0 0 12px;
+    &:last-child {
+      padding-left: 20px;
     }
+  }
+  button {
+    margin-bottom: 8px;
   }
 }

@@ -12,11 +12,6 @@ h3 {
   justify-content: space-between;
   align-items: center;
   margin-top: 20px;
-  .finish {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
 }
 
 .current-step-content {
@@ -25,92 +20,127 @@ h3 {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .finish {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+  }
+}
+.scholarship {
+  padding-bottom: 30px;
+  .visual-progress-container {
+    overflow-x: hidden;
+    padding: 16px 0;
+    margin: 40px 0;
+  
+    .visual-progress-background {
+      position: relative;
+      &:before {
+        content: '';
+        border-top: 2px solid $grayLight;
+        display: block;
+        width: 100%;
+        position: absolute;
+        top: 9px;
+        z-index: -2;
+      }
+    }
+    .visual-progress {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      flex-direction: column;
+      position: relative;
+      transition: all 0.5s ease 0s;
+      &:before {
+        content: '';
+        border-top: 2px solid $primaryBlueLight;
+        display: block;
+        width: 100%;
+        position: absolute;
+        top: 9px;
+        z-index: -1;
+      }
+      .circle {
+        background: white;
+        border: 2px solid $primaryBlueLight;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+      }
+      .step {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        flex: 1;
+        &:first-child,
+        &:last-child {
+          flex: 0 0;
+        }
+      }
+    }
+    .actions {
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      position: relative;
+      .current-step {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        span:first-child {
+          font-weight: 700;
+          color: $primaryBlueDark;
+        }
+        span:last-child {
+          font-size: 12px;
+          color: $gray;
+        }
+      }
+      button {
+        position: absolute;
+        display: flex;
+        gap: 4px;
+        align-items: center;
+        background: none;
+        border: none;
+        &.hide {
+          opacity: 0;
+        }
+        &:first-child {
+          left: 0;
+        }
+        &:last-child {
+          right: 0;
+        }
+      }
+    }
+  }
 }
 
-.visual-progress-container {
-  overflow-x: hidden;
-  padding: 16px 0;
-  margin: 40px 0;
-
-  .visual-progress-background {
-    position: relative;
-    &:before {
-      content: '';
-      border-top: 2px solid $grayLight;
-      display: block;
-      width: 100%;
-      position: absolute;
-      top: 9px;
-      z-index: -2;
-    }
-  }
-  .visual-progress {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    flex-direction: column;
-    position: relative;
-    transition: all 0.5s ease 0s;
-    &:before {
-      content: '';
-      border-top: 2px solid $primaryBlueLight;
-      display: block;
-      width: 100%;
-      position: absolute;
-      top: 9px;
-      z-index: -1;
-    }
-    .circle {
-      background: white;
-      border: 2px solid $primaryBlueLight;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-    }
-    .step {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      flex: 1;
-      &:first-child,
-      &:last-child {
-        flex: 0 0;
+@media (max-width: 767px) {
+  .current-step-content {
+    .buttons {
+      .finish {
+        justify-content: center;
+        span {
+          flex: initial;
+        }
       }
     }
   }
-  .actions {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    position: relative;
-    .current-step {
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      span:first-child {
-        font-weight: 700;
-        color: $primaryBlueDark;
-      }
-      span:last-child {
-        font-size: 12px;
-        color: $gray;
-      }
-    }
-    button {
-      position: absolute;
-      display: flex;
-      gap: 4px;
-      align-items: center;
-      background: none;
-      border: none;
-      &.hide {
-        opacity: 0;
-      }
-      &:first-child {
-        left: 0;
-      }
-      &:last-child {
-        right: 0;
+  .scholarship {
+    .visual-progress-container {
+      padding-top: 20px;
+      .actions {
+        button {
+          top: -45px;
+        }
       }
     }
   }

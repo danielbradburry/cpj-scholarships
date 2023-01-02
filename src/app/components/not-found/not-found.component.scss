@@ -1,0 +1,15 @@
+@import '../../../sass/vars';
+
+:host {
+  text-align: center;
+
+  h1 {
+    font-size: 50px;
+    margin-top: 20%;
+  }
+
+  button {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+}

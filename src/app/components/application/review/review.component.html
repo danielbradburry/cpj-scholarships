@@ -27,7 +27,7 @@
       >
         <label
           >{{ question.label }}:
-          <span>{{ step.formGroup.value[question.name] }}</span>
+          <span>{{ question.type === 'date' ? castToDate(step.formGroup.value[question.name]) : step.formGroup.value[question.name] }}</span>
         </label>
       </div>
     </div>
@@ -46,6 +46,10 @@
         *ngIf="step.folder.applicationUploads?.length"
       >
         <p>Files uploaded:</p>
+        <div class="file heading">
+          <div>Name</div>
+          <div>Size</div>
+        </div>
         <div
           class="file"
           *ngFor="let upload of step.folder.applicationUploads"
@@ -55,27 +59,17 @@
             target="_blank"
             >{{ upload.name }}</a
           >
-          <div class="size">- {{ upload.size }}</div>
+          <div class="size">{{ upload.size }}</div>
         </div>
       </div>
+      <div *ngIf="step.folder.thirdPartySubmissionRequests?.length" class="third-party">
+        <p>You sent requests for file/document uploads to these email addresses.</p>
+        <div class="request" *ngFor="let request of step.folder.thirdPartySubmissionRequests">
+          <div class="email">Email: <span>{{request.email}}</span></div>
+          <div class="uploads">{{ request.thirdPartyUploads }} Upload Submission(s) Received</div>
+        </div>
+        <div class="info">Any files received in this fashion will be automatically submitted with your application.</div>
+      </div>
     </div>
-  </div>
-  <div class="buttons">
-    <button
-      (click)="submitFn()"
-      class="btn btn-confirm formSubmit"
-      [disabled]="submitting"
-    >
-      <span>Submit Application</span>
-      <img
-        *ngIf="submitting"
-        class="loading"
-        src="/assets/images/loading-confirm.gif"
-      />
-      <i
-        *ngIf="!submitting"
-        class="fas fa-arrow-circle-right"
-      ></i>
-    </button>
   </div>
 </div>

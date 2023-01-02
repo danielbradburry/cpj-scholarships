@@ -15,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ScholarshipHeadingComponent implements OnInit {
   @Input() program: any;
   @Input() active: number;
+  @Input() disableLinks?: boolean;
   user: any;
   applicant: any;
 

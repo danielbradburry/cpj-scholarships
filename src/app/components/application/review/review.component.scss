@@ -31,13 +31,27 @@
         }
       }
       .file {
-        a {
-          font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 14px;
+        &.heading {
+          font-weight: 700;
         }
-        .size {
+      }
+      .third-party {
+        margin-top: 12px;
+        .email, .uploads {
+          font-size: 14px;
+          font-weight: 700;
+          span {
+            font-weight: 400;
+          }
+        }
+        .info {
           font-size: 12px;
-          padding-left: 12px;
           font-style: italic;
+          margin-top: 12px;
         }
       }
     }

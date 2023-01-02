@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-review',
@@ -21,11 +22,11 @@ export class ApplicationReviewComponent implements OnInit {
     );
   }
 
-  goToStep(index) {
-    this.stepChanged.emit(index);
+  castToDate(value) {
+    return moment(value, 'YYYY-MM-DD').format('MM-DD-YYYY');
   }
 
-  submitFn() {
-    this.submit.emit(true);
+  goToStep(index) {
+    this.stepChanged.emit(index);
   }
 }

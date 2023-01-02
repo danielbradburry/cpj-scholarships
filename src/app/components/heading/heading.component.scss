@@ -47,6 +47,10 @@
   }
 }
 
+.navbar {
+  min-height: 34px;
+}
+
 @media (max-width: 991px) {
   #navbarNav {
     display: block;

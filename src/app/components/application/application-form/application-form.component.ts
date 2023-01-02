@@ -41,6 +41,12 @@ export class ApplicationFormComponent implements OnInit {
     this.cdRef.detectChanges();
   }
 
+  keyDown(event) {
+    if (event.keyCode === 13) {
+      this.submit();
+    }
+  }
+
   submit() {
     this.formGroup = this.formsService.prepareFormGroupValues(this.formGroup);
     this.formSubmit.emit(this.formGroup);

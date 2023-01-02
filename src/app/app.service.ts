@@ -115,34 +115,70 @@ export class ScholarshipService {
   updateFormResponse(
     scholarshipProgramURL,
     scholarshipURL,
+    applicationID,
     applicationFormID,
     form
   ) {
     return this.http.post(
-      `${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/applications/application-forms/${applicationFormID}`,
+      `${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/applications/${applicationID}/application-forms/${applicationFormID}`,
       form
     );
   }
 
-  uploadFile(scholarshipProgramURL, scholarshipURL, documentFolderID, file) {
+  uploadFile(scholarshipProgramURL, scholarshipURL, applicationID, documentFolderID, file) {
     return this.http.post(
-      `${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/applications/uploads/${documentFolderID}`,
+      `${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/applications/${applicationID}/uploads/${documentFolderID}`,
       file,
       { reportProgress: true, observe: 'events' }
     );
   }
 
-  removeFile(scholarshipProgramURL, scholarshipURL, documentFolderID, file) {
+  removeFile(scholarshipProgramURL, scholarshipURL, applicationID, documentFolderID, file) {
     return this.http.post(
-      `${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/applications/uploads/${documentFolderID}/remove`,
+      `${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/applications/${applicationID}/uploads/${documentFolderID}/remove`,
       file
     );
   }
 
-  submitApplication(scholarshipProgramURL, scholarshipURL) {
+  submitApplication(scholarshipProgramURL, scholarshipURL, applicationID) {
     return this.http.post(
-      `${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/applications/submit`,
+      `${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/applications/${applicationID}/submit`,
       {}
+    );
+  }
+
+  createThirdPartySubmissionRequest(scholarshipProgramURL, scholarshipURL, applicationID, documentFolderID, form) {
+    return this.http.post(
+      `${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/applications/${applicationID}/third-party-requests/${documentFolderID}`,
+      form
+    );
+  }
+
+  getThirdPartySubmissionRequest(scholarshipProgramURL, scholarshipURL, applicationID, requestID) {
+    return this.http.get(
+      `${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/applications/${applicationID}/third-party-requests/${requestID}`
+    );
+  }
+
+  removeThirdPartySubmissionRequest(scholarshipProgramURL, scholarshipURL, applicationID, documentFolderID, requestID) {
+    return this.http.post(
+      `${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/applications/${applicationID}/third-party-requests/${documentFolderID}/${requestID}/remove`,
+      {}
+    );
+  }
+
+  uploadFileByThirdParty(scholarshipProgramURL, scholarshipURL, applicationID, requestID, file) {
+    return this.http.post(
+      `${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/applications/${applicationID}/third-party-uploads/${requestID}`,
+      file,
+      { reportProgress: true, observe: 'events' }
+    );
+  }
+
+  removeFileByThirdParty(scholarshipProgramURL, scholarshipURL, applicationID, requestID, file) {
+    return this.http.post(
+      `${environment.apiDomain}scholarship-programs/${scholarshipProgramURL}/${scholarshipURL}/applications/${applicationID}/third-party-uploads/${requestID}/remove`,
+      file
     );
   }
 }

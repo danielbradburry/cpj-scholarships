@@ -16,11 +16,11 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-authentication',
-  templateUrl: './authentication.component.html',
-  styleUrls: ['./authentication.component.scss']
+  selector: 'app-applicant',
+  templateUrl: './applicant.component.html',
+  styleUrls: ['./applicant.component.scss']
 })
-export class AuthenticationComponent implements OnInit, AfterViewInit {
+export class ApplicantComponent implements OnInit, AfterViewInit {
   program: any;
   applicant: any;
   state: string;

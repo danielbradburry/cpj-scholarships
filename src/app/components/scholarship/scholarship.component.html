@@ -1,9 +1,10 @@
 <scholarship-heading
+  *ngIf="program"
   [program]="program"
   [active]="0"
 ></scholarship-heading>
 
-<div class="scholarship">
+<div *ngIf="scholarship" class="scholarship">
   <h3>
     {{ scholarship.scholarshipName }}
     <button
@@ -51,7 +52,7 @@
   ></p>
 </div>
 <button
-  *ngIf="scholarship.isOpen && !application?.complete"
+  *ngIf="scholarship?.isOpen && !application?.complete"
   class="btn btn-confirm formSubmit mb-3"
   (click)="register()"
 >

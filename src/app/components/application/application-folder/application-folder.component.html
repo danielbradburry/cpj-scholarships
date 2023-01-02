@@ -6,6 +6,15 @@
     [innerText]="folder.description"
   ></p>
 
+  <div class="third-party" *ngIf="folder.enableThirdParty">
+    <p>{{ folder.optionalThirdPartyInstruction || optionalThirdPartyInstruction }}</p>
+    <button class="btn btn-primary" (click)="manageThirdParties()">Manage Third Party Requests</button>
+    <p>&mdash;or&mdash;</p>
+  </div>
+
+  <label for="upload" class="btn btn-primary">
+    <i class="fas fa-file-upload"></i> Upload Files
+  </label>
   <input
     *ngIf="folder.applicationUploads.length < folder.maxUploads"
     multiple
@@ -20,9 +29,21 @@
       *ngIf="fileUploads.length"
       [fileUploads]="fileUploads"
     ></upload-progress>
+    <div class="file">
+      <div class="name heading">
+        <div>File</div>
+        <div>Size</div>
+      </div>
+    </div>
+    <div *ngIf="!folder.applicationUploads?.length" class="file">
+      <div class="name no-file">
+        <div>No Files Found</div>
+        <div>0 Bytes</div>
+      </div>
+    </div>
     <div
       class="file"
-      *ngFor="let file of folder.applicationUploads; let i = index"
+      *ngFor="let file of folder.applicationUploads"
     >
       <button
         class="btn btn-danger"
@@ -42,25 +63,13 @@
         ></i>
       </button>
       <div class="name">
-        <span>{{ file.name }}</span>
-        <span>Size: {{ file.size }}</span>
+        <a target="_blank" href="{{ file.URL }}">{{ file.name }}</a>
+        <div>{{ file.size }}</div>
       </div>
-    </div>
-    <div
-      class="empty"
-      *ngIf="!folder.applicationUploads.length"
-    >
-      &mdash; No files found
     </div>
   </div>
 
   <ul class="status">
-    <li>
-      Permitted file type(s): <span>{{ accepts }}</span>
-    </li>
-    <li>
-      Maximum file size: <span>{{ folder.maxFileSize }}MB</span>
-    </li>
     <li>
       <span
         >{{ folder.applicationUploads.length }} of {{ folder.maxUploads }} files
@@ -73,5 +82,12 @@
         >({{ folder.minUploads }} required)</span
       >
     </li>
+    <li>
+      Permitted file type(s): <span>{{ accepts }}</span>
+    </li>
+    <li>
+      Maximum file size: <span>{{ folder.maxFileSize }}MB</span>
+    </li>
   </ul>
+  
 </div>

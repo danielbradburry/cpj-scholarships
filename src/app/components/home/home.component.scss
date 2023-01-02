@@ -1,69 +1,102 @@
 @import '../../../sass/vars';
 
+h3 {
+  font-size: 20px;
+  border-bottom: 2px solid $gray;
+  padding-bottom: 4px;
+  font-weight: 700;
+  color: $primaryBlueDark;
+  margin-top: 20px;
+}
 .scholarships {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  h3 {
-    font-size: 20px;
-    border-bottom: 2px solid $gray;
-    padding-bottom: 4px;
-    font-weight: 700;
-    color: $primaryBlueDark;
-    margin-top: 20px;
-  }
+  padding-bottom: 30px;
   .scholarship {
     cursor: pointer;
     border: 1px solid $gray;
     border-radius: 4px;
     text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     padding: 8px;
     color: $primaryBlue;
     transition: all 0.25s ease 0s;
-    > div {
+    .info {
       display: flex;
-      align-items: flex-start;
-      flex-direction: column;
-      .name {
+      align-items: center;
+      justify-content: space-between;
+      > div {
         display: flex;
-        align-items: center;
-        gap: 8px;
-        > span:first-child {
-          text-decoration: underline;
+        align-items: flex-start;
+        flex-direction: column;
+        .name {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          > span:first-child {
+            text-decoration: underline;
+          }
+          .in-progress {
+            font-size: 12px;
+            background-color: $primaryBlueLight;
+            color: $offWhite;
+            padding: 2px 4px;
+            margin-bottom: 2px;
+            border-radius: 4px;
+          }
+          .submitted {
+            font-size: 12px;
+            background-color: $green;
+            color: $offWhite;
+            padding: 2px 4px;
+            margin-bottom: 2px;
+            border-radius: 4px;
+          }
         }
-        .in-progress {
-          font-size: 12px;
-          background-color: $primaryBlueLight;
-          color: $offWhite;
-          padding: 2px 4px;
-          margin-bottom: 2px;
-          border-radius: 4px;
-        }
-        .submitted {
-          font-size: 12px;
-          background-color: $green;
-          color: $offWhite;
-          padding: 2px 4px;
-          margin-bottom: 2px;
-          border-radius: 4px;
-        }
-      }
 
-      &:last-child {
-        align-items: flex-end;
+        &:last-child {
+          align-items: flex-end;
+        }
+        .amount,
+        .status {
+          font-size: 12px;
+        }
       }
-      .amount,
-      .status {
-        font-size: 12px;
-      }
+    }
+    .description {
+      font-size: 12px;
+      font-weight: 700;
+      font-style: italic;
+      border-top: 1px solid $gray;
+      padding-top: 12px;
+      margin-top: 12px;
     }
     &:hover {
       border-color: $primaryBlue;
       background-color: $primaryBlue;
       color: $offWhite;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .scholarships {
+    .scholarship {
+      .info {
+        flex-direction: column;
+        > div {
+          .name {
+            flex-direction: column;
+            align-items: initial;
+            span:first-child {
+              order: 2;
+            }
+          }
+          &:last-child {
+            width: 100%;
+          }
+        }
+      }
     }
   }
 }

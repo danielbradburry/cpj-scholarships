@@ -126,6 +126,11 @@ export class ApplicationComponent implements OnInit {
     } else {
       this.goRightFn();
     }
+
+    const goRightButton = document.querySelector(
+      '#go-right'
+    ) as HTMLElement;
+    goRightButton.blur();
   }
 
   goRightFn() {
@@ -136,6 +141,7 @@ export class ApplicationComponent implements OnInit {
   }
 
   saveForLater() {
+    this.submitting = true;
     if (this.currentStep.form) {
       const finishLaterButton = document.querySelector(
         '#applicationFormFinishLater'
@@ -192,6 +198,7 @@ export class ApplicationComponent implements OnInit {
       .uploadFile(
         this.program.url,
         this.scholarship.url,
+        this.application.applicationID,
         this.currentStep.folder.documentFolderID,
         formData
       )
@@ -240,6 +247,7 @@ export class ApplicationComponent implements OnInit {
       .removeFile(
         this.program.url,
         this.scholarship.url,
+        this.application.applicationID,
         this.currentStep.folder.documentFolderID,
         file
       )
@@ -250,6 +258,7 @@ export class ApplicationComponent implements OnInit {
             this.currentStep.folder.applicationUploads.indexOf(file),
             1
           );
+          this.toastr.success('File removed', 'Success!');
         },
         (error: HttpErrorResponse) => {
           this.toastr.error(error.message, 'Error!');
@@ -274,9 +283,11 @@ export class ApplicationComponent implements OnInit {
       .updateFormResponse(
         this.program.url,
         this.scholarship.url,
+        this.application.applicationID,
         this.currentStep.form.applicationFormID,
         {
-          applicationForm: form.value
+          applicationForm: form.value,
+          questions: this.currentStep.form.applicationFormQuestions
         }
       )
       .pipe(takeUntil(this.unsubscribe))
@@ -312,9 +323,11 @@ export class ApplicationComponent implements OnInit {
       .updateFormResponse(
         this.program.url,
         this.scholarship.url,
+        this.application.applicationID,
         this.currentStep.form.applicationFormID,
         {
-          applicationForm: form.value
+          applicationForm: form.value,
+          questions: this.currentStep.form.applicationFormQuestions
         }
       )
       .pipe(takeUntil(this.unsubscribe))
@@ -344,7 +357,7 @@ export class ApplicationComponent implements OnInit {
         this.submitting = true;
 
         this.scholarshipService
-          .submitApplication(this.program.url, this.scholarship.url)
+          .submitApplication(this.program.url, this.scholarship.url, this.application.applicationID)
           .pipe(takeUntil(this.unsubscribe))
           .subscribe(
             (response: any) => {

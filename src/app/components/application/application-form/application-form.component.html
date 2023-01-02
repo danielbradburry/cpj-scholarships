@@ -18,6 +18,7 @@
         <span *ngIf="question.required">* </span>{{ question.label }}
         <input
           autocomplete="new-password"
+          (keydown)="keyDown($event)"
           [class.error]="formGroup.controls[question.name].errors && formGroup.controls[question.name].touched"
           *ngIf="question.type === 'text'"
           [required]="question.required"
@@ -27,6 +28,7 @@
         />
         <input
           autocomplete="new-password"
+          (keydown)="keyDown($event)"
           *ngIf="question.type === 'email'"
           [class.error]="formGroup.controls[question.name].errors && formGroup.controls[question.name].touched"
           [required]="question.required"
@@ -37,6 +39,7 @@
         />
         <input
           autocomplete="new-password"
+          (keydown)="keyDown($event)"
           *ngIf="question.type === 'phone'"
           [class.error]="formGroup.controls[question.name].errors && formGroup.controls[question.name].touched"
           [required]="question.required"
@@ -48,6 +51,7 @@
         />
         <input
           autocomplete="new-password"
+          (keydown)="keyDown($event)"
           *ngIf="question.type === 'ssn'"
           [class.error]="formGroup.controls[question.name].errors && formGroup.controls[question.name].touched"
           [required]="question.required"
@@ -64,6 +68,7 @@
           onfocusin="this.classList.add('active')"
           [element]="question"
           [group]="formGroup"
+          (keydownFn)="keyDown($event)"
           *ngIf="question.type === 'textarea'"
         ></textarea-restrict>
         <input
@@ -96,6 +101,7 @@
         >
           <input
             [required]="question.required"
+            (keydown)="keyDown($event)"
             [class.error]="formGroup.controls[question.name].errors && formGroup.controls[question.name].touched"
             class="form-control"
             placeholder="MM-DD-YYYY"

@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
+import * as moment from 'moment';
 
 @Component({
   selector: 'application-review',
@@ -21,7 +22,7 @@ export class ReviewComponent implements OnInit {
   constructor(
     public activeModal: NgbActiveModal,
     private toastr: ToastrService,
-    private scholarshipService: ScholarshipService
+    private scholarshipService: ScholarshipService,
   ) {}
 
   ngOnInit(): void {
@@ -49,5 +50,9 @@ export class ReviewComponent implements OnInit {
       .add(() => {
         this.loading = false;
       });
+  }
+
+  castToDate(value) {
+    return moment(value, 'YYYY-MM-DD').format('MM-DD-YYYY');
   }
 }

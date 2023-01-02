@@ -1,0 +1,120 @@
+<scholarship-heading
+  *ngIf="program"
+  [program]="program"
+  [active]="0"
+  [disableLinks]="true"
+></scholarship-heading>
+<div *ngIf="request">
+  <h3>{{ request.scholarshipName }}</h3>
+  <p><i><b>{{ request.fullName }}</b> is applying for a scholarship/grant and would like for you to upload files or documents that will support their application.</i></p>
+  <div class="coordinators" *ngIf="program?.coordinators?.length">
+    <p>For questions regarding this request for information please contact:</p>
+    <div
+      *ngFor="let coordinator of program?.coordinators"
+      class="col-sm-12"
+    >
+      <div
+        *ngIf="coordinator.user"
+        class="user"
+      >
+        <mini-profile
+          [user]="coordinator.user"
+          [config]="miniProfileConfig"
+        ></mini-profile>
+      </div>
+      <div
+        *ngIf="!coordinator.user"
+        class="mb-2 non-user"
+      >
+        <div class="name">{{ coordinator.text }}</div>
+        <a
+          *ngIf="coordinator.email"
+          class="email"
+          href="mailto:{{ coordinator.email }}"
+          >{{ coordinator.email }}</a
+        >
+        <a
+          *ngIf="coordinator.phone"
+          href="tel:{{ coordinator.phone }}"
+          class="phone"
+          >{{ coordinator.phone | phone }}</a
+        >
+      </div>
+    </div>
+  </div>
+  <div class="folder">
+    <h4>{{ request.name }}</h4>
+    <p
+      class="description"
+      *ngIf="request.description"
+      [innerText]="folder.description"
+    ></p>
+
+    <div class="content">
+      <label for="upload" class="btn btn-primary">
+        <i class="fas fa-file-upload"></i> Upload Files
+      </label>
+      <input
+        multiple
+        type="file"
+        id="upload"
+        (change)="uploadFile($event)"
+        accept="{{ fileTypeRestriction }}"
+      />
+      <div class="files">
+        <upload-progress
+          *ngIf="fileUploads.length"
+          [fileUploads]="fileUploads"
+        ></upload-progress>
+        <div class="file">
+          <div class="name heading">
+            <div>File</div>
+            <div>Size</div>
+          </div>
+        </div>
+        <div *ngIf="!request.thirdPartyUploads?.length" class="file">
+          <div class="name no-file">
+            <div>No Files Found</div>
+            <div>0 Bytes</div>
+          </div>
+        </div>
+        <div
+          class="file"
+          *ngFor="let file of request.thirdPartyUploads"
+        >
+          <button
+            class="btn btn-danger"
+            (click)="removeFile(file)"
+            placement="top"
+            ngbTooltip="Remove"
+            triggers="hover"
+          >
+            <img
+              *ngIf="file.removing"
+              class="loading"
+              src="/assets/images/loading-danger.gif"
+            />
+            <i
+              *ngIf="!file.removing"
+              class="fas fa-trash-alt"
+            ></i>
+          </button>
+          <div class="name">
+            <a target="_blank" href="{{ file.URL }}">{{ file.name }}</a>
+            <div>{{ file.size }}</div>
+          </div>
+        </div>
+      </div>
+      <ul class="status">
+        <li><span>{{ request.thirdPartyUploads.length }} files uploaded</span></li>
+        <li>
+          Permitted file type(s): <span>{{ accepts }}</span>
+        </li>
+        <li>
+          Maximum file size: <span>{{ request.maxFileSize }}MB</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+  

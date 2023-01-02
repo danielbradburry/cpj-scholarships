@@ -25,6 +25,8 @@ export class ConstantsService {
   noChapterLogo =
     'https://d1nt1hxve4jn1b.cloudfront.net/default-images/chapters/no-logo.jpg';
 
+  optionalScholarshipThirdPartyInstruction = 'Applicants can make special requests for third parties to upload supporting documents and files directly into this folder.';
+
   yesOrNo = [
     {
       label: 'Yes',

@@ -13,15 +13,17 @@ import { NgxMaskModule } from 'ngx-mask';
 // Components
 import { HomeComponent } from './components/home/home.component';
 import { ApplicationFolderComponent } from './components/application/application-folder/application-folder.component';
+import { ThirdPartyComponent } from './components/application/application-folder/third-party/third-party.component';
+import { ThirdPartyUploadComponent } from './components/application/third-party-upload/third-party-upload.component';
 import { ApplicationFormComponent } from './components/application/application-form/application-form.component';
 import { TextareaRestrictComponent } from './components/application/application-form/textarea-restrict/textarea-restrict.component';
-import { AuthenticationComponent } from './components/authentication/authentication.component';
-import { LoginComponent } from './components/authentication/login/login.component';
-import { SigninComponent } from './components/authentication/signin/signin.component';
-import { UpdateApplicantComponent } from './components/authentication/update-applicant/update-applicant.component';
-import { MyScholarshipsComponent } from './components/authentication/my-scholarships/my-scholarships.component';
-import { ChangePasswordComponent } from './components/authentication/password/password.component';
-import { ForgotPasswordComponent } from './components/authentication/forgot-password/forgot-password.component';
+import { ApplicantComponent } from './components/applicant/applicant.component';
+import { LoginComponent } from './components/applicant/login/login.component';
+import { SigninComponent } from './components/applicant/signin/signin.component';
+import { UpdateApplicantComponent } from './components/applicant/update-applicant/update-applicant.component';
+import { MyScholarshipsComponent } from './components/applicant/my-scholarships/my-scholarships.component';
+import { ChangePasswordComponent } from './components/applicant/password/password.component';
+import { ForgotPasswordComponent } from './components/applicant/forgot-password/forgot-password.component';
 import { ApplicantResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ScholarshipComponent } from './components/scholarship/scholarship.component';
 import { ApplicationComponent } from './components/application/application.component';
@@ -35,6 +37,7 @@ import { AutoFormComponent } from './shared/components/auto-form/auto-form.compo
 import { ConfirmComponent } from './shared/components/confirm/confirm.component';
 import { MiniProfileComponent } from './shared/components/mini-profile/mini-profile.component';
 import { UploadProgressComponent } from './shared/components/upload-progress/upload-progress.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 // Services
 import { ScholarshipService } from './app.service';
@@ -58,9 +61,11 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     AppComponent,
     HomeComponent,
     ApplicationFolderComponent,
+    ThirdPartyComponent,
+    ThirdPartyUploadComponent,
     ApplicationFormComponent,
     TextareaRestrictComponent,
-    AuthenticationComponent,
+    ApplicantComponent,
     LoginComponent,
     SigninComponent,
     UpdateApplicantComponent,
@@ -82,6 +87,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     KeysPipe,
     HelpComponent,
     MiniProfileComponent,
+    NotFoundComponent,
     ViewRefDirective
   ],
   imports: [

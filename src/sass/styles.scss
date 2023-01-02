@@ -270,7 +270,8 @@ textarea:active {
   background: $green;
   border-color: $green;
   color: $offWhite;
-  &:hover {
+  &:hover,
+  &:focus {
     background: $greenLight;
     color: $white;
   }

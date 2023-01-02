@@ -1,0 +1,37 @@
+<div class="modal-header">
+  <h4 class="modal-title">Manage Submission Requests</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <p><b>We email web links to the email addresses you provide, but we strongly recommend that applicants copy the links that appear below and send their own submission requests manually. You will be notified via email when a file has been received through an online submission request.</b></p>
+  <p *ngIf="folder.thirdPartySubmissionRequests?.length">You have sent requests for upload submissions to these email addresses:</p>
+  <div class="request" *ngFor="let request of folder.thirdPartySubmissionRequests">
+    <div class="info">
+      <div class="email">Email: <span>{{request.email}}</span></div>
+      <div class="actions">
+        <button
+          class="btn btn-confirm"
+          (click)="copyLink(request)"
+        ><i class="far fa-clone"></i> Copy Link
+        </button>
+        <button
+          class="btn btn-danger"
+          (click)="removeRequest(request)"
+        ><i class="fas fa-trash-alt"></i> Remove</button>
+      </div>
+    </div>
+    <div class="uploads">{{ request.thirdPartyUploads }} Upload Submission(s) Received</div>
+  </div>
+  <auto-form
+    [configuration]="formConfiguration"
+    (formSubmit)="createRequest($event)"
+    [submitting]="submitting"
+  ></auto-form>
+</div>
